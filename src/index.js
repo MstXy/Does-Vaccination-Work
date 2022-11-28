@@ -42,6 +42,8 @@ function Vacc(){
     // console.log(temp);
 
     return <div>
+        <h1>Does Vaccination Work?</h1>
+        <h2>Based on Covid Cases, Vaccinated Population and Vaccination Policies.</h2>
         <svg width={WIDTH} height={TOTAL_HEIGHT}>
             <g>
                 <HeatMap margin={margin} height={height} width={width} data={data_heatmap}/>
