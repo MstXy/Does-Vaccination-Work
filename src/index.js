@@ -7,7 +7,7 @@ import "./styles.css";
 import { HeatMap } from "./heatmap";
 import { LineChart, MultipleLineChart } from './linecharts';
 
-import { useData_time, useData_heatmap, removeDuplicateStation } from './utils'
+import { useData, useData_time, useData_heatmap, removeDuplicateStation } from './utils'
 
 const csvUrl_heatmap = 'https://gist.githubusercontent.com/hogwild/3b9aa737bde61dcb4dfa60cde8046e04/raw/citibike2020.csv'
 const csvUrl_time = "https://gist.githubusercontent.com/hogwild/4a23b2327e88e6e3aa101bb01ddb28ba/raw/81fd842af7328d2ad6d2a498cc4589031ae5b4af/citibike_rawdata_2020_4.csv"
@@ -27,6 +27,8 @@ function Vacc(){
     const width = WIDTH - margin.left - margin.right;
     const data_heatmap = useData_heatmap(csvUrl_heatmap);
     const data_time = useData_time(csvUrl_time);
+    
+    const data = useData(csvUrl_10day, "tenDay");
 
     if(!data_heatmap){
         return <pre>Loading...</pre>
