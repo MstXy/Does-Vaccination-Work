@@ -8,7 +8,7 @@ import { findTimePoints } from './utils'
 
 export function HeatMap(props){
 
-    const {margin, height, width, data, COUNTRY} = props;
+    const {margin, height, width, data, COUNTRY, selectedPoint, setSelectedPoint} = props;
     const TIME_POINTS = findTimePoints(data);
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
@@ -18,10 +18,14 @@ export function HeatMap(props){
     const colormap = Scales.colormapLiner(startRange, colorRange);
     // const colormap = Scales.colorSequential(startRange, interpolateGnBu);
     // const colormap = Scales.colorDiverging(startRange, interpolateRdBu);
+
+
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
             data.map( d => {
-                return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.ConfirmedCases)} />
+                return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.ConfirmedCases)} 
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}
+                />
             } )
         }
         {TIME_POINTS.map(s => {

@@ -15,15 +15,31 @@ const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/68c6490e57bbcbd1a
 const csvUrl_tenDay = 'https://gist.githubusercontent.com/MstXy/c73fd1b27493f8911185af457f1ac6f2/raw/a2fda4ba7a9844b787b372b57d27f3ce6274bf70/tenDay_oxcgrt.csv'
 const csvUrl_monthly = 'https://gist.githubusercontent.com/MstXy/cfff2134a6b897f4be6bf73d448e5259/raw/f49720050849da400a1779f628f0f675319e62f7/monthly_oxcgrt.csv'
 
-
+const COUNTRY_16 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
+                    'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
+                    'South Africa', 'Canada', 'Australia', 'United States', 'Brazil', 'Mexico'];
+const COUNTRY_20 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
+                    'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
+                    'South Africa', 'Canada', 'Australia', 'United States', 'Brazil', 
+                    'Mexico','Greenland','Indonesia','New Zealand','Argentina'];
+const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
+                    'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
+                    'South Africa', 'Canada', 'Australia', 'United States', 
+                    'Brazil', 'Mexico','Greenland','Indonesia','New Zealand',
+                    'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
+                    'Mali','South Korea','Kazakhstan','Peru','Colombia'];
 
 function Vacc(){
+
+    const [selectedPoint, setSelectedPoint] = React.useState(null);
+
     const WIDTH = 900;
     const HEIGHT = 400;
     const TOTAL_HEIGHT = 900;
     const margin = {top: 100, right: 40, bottom: 50, left: 60};
     const height = HEIGHT - margin.top - margin.bottom;
     const width = WIDTH - margin.left - margin.right;
+    
     const data_time = useData_time(csvUrl_time);
     
     // select data
@@ -38,20 +54,6 @@ function Vacc(){
     if (!data) {
         return <p>Loading...</p>
     }
-
-    const COUNTRY_16 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
-                        'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
-                        'South Africa', 'Canada', 'Australia', 'United States', 'Brazil', 'Mexico'];
-    const COUNTRY_20 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
-                        'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
-                        'South Africa', 'Canada', 'Australia', 'United States', 'Brazil', 
-                        'Mexico','Greenland','Indonesia','New Zealand','Argentina'];
-    const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
-                        'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
-                        'South Africa', 'Canada', 'Australia', 'United States', 
-                        'Brazil', 'Mexico','Greenland','Indonesia','New Zealand',
-                        'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
-                        'Mali','South Korea','Kazakhstan','Peru','Colombia'];
 
     var COUNTRY_LIST = COUNTRY_30;
     // filter data to country only in the list
@@ -74,7 +76,8 @@ function Vacc(){
         <h2>Based on Covid Cases, Vaccinated Population and Vaccination Policies.</h2>
         <svg width={WIDTH} height={TOTAL_HEIGHT}>
             <g>
-                <HeatMap margin={margin} height={height} width={width} data={filteredData} COUNTRY={COUNTRY_LIST}/>
+                <HeatMap margin={margin} height={height} width={width} data={filteredData} COUNTRY={COUNTRY_LIST} 
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
                 {/* <MultipleLineChart x={margin.left} y={HEIGHT+margin.bottom} width={width} height={height} data={weekly} /> */}
             </g>
         </svg>
