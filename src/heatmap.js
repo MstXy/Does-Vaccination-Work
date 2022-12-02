@@ -19,6 +19,23 @@ export function HeatMap(props){
     // const colormap = Scales.colorSequential(startRange, interpolateGnBu);
     // const colormap = Scales.colorDiverging(startRange, interpolateRdBu);
 
+    const textOpacity_country = (selectedPoint, thisPoint) => {
+        if  (!selectedPoint) {
+            return 1
+        } else {
+            // also check if in the same row / col with the selected point
+            return (selectedPoint.CountryName === thisPoint) ? 1 : 0.4  
+        } 
+    };
+
+    const textOpacity_time = (selectedPoint, thisPoint) => {
+        if  (!selectedPoint) {
+            return 1
+        } else {
+            // also check if in the same row / col with the selected point
+            return (selectedPoint.Date === thisPoint) ? 1 : 0.4  
+        } 
+    };
 
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
@@ -30,11 +47,17 @@ export function HeatMap(props){
         }
         {TIME_POINTS.map(s => {
                         return <g key={s} transform={`translate(${xScale(s)+5},-8)rotate(60)`}>
-                        <text style={{textAnchor:'end'}}>{s}</text>
+                        <text style={{textAnchor:'end'}}
+                                opacity={textOpacity_time(selectedPoint, s)}>
+                                    {s}
+                            </text>
                         </g>
                     })}
         {COUNTRY.map(m => {
-                    return <text key={m} style={{textAnchor:'end'}} x={-5} y={yScale(m)+10}>{m}</text>
+                    return <text key={m} style={{textAnchor:'end'}} x={-5} y={yScale(m)+10}
+                                opacity={textOpacity_country(selectedPoint, m)}>
+                                {m}
+                            </text>
                 })}
         <Legend x={0} y={height+10} width={width/2} height={20} numberOfTicks={5} 
             rangeOfValues={[min(data, d => d.ConfirmedCases), max(data, d => d.ConfirmedCases)]} colormap={colormap}/>
