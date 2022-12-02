@@ -33,10 +33,10 @@ function Vacc(){
 
     const [selectedPoint, setSelectedPoint] = React.useState(null);
 
-    const WIDTH = 900;
-    const HEIGHT = 400;
+    const WIDTH = 1100;
+    const HEIGHT = 450;
     const TOTAL_HEIGHT = 900;
-    const margin = {top: 100, right: 40, bottom: 50, left: 60};
+    const margin = {top: 100, right: 40, bottom: 50, left: 75};
     const height = HEIGHT - margin.top - margin.bottom;
     const width = WIDTH - margin.left - margin.right;
     
