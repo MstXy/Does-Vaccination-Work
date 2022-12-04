@@ -8,12 +8,23 @@ import { findTimePoints } from './utils'
 
 export function HeatMap(props){
 
-    const {margin, height, width, data, COUNTRY, selectedPoint, setSelectedPoint} = props;
+    const {margin, height, width, data, COUNTRY, SWITCH, selectedPoint, setSelectedPoint} = props;
     const TIME_POINTS = findTimePoints(data);
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
     const yScale = Scales.band(COUNTRY, 0, height);
-    const startRange = [min(data, d => d.ConfirmedCases), median(data, d => d.ConfirmedCases), max(data, d => d.ConfirmedCases)];
+    if (SWITCH == 0) {
+        // show cases
+        var startRange = [min(data, d => d.NewConfirmedCases), median(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];
+        // range for legend
+        var rangeOfValues = [min(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];
+    } else if (SWITCH == 1) {
+        // show death
+        var startRange = [min(data, d => d.NewConfirmedDeaths), median(data, d => d.NewConfirmedDeaths), max(data, d => d.NewConfirmedDeaths)];
+        // range for legend
+        var rangeOfValues = [min(data, d => d.NewConfirmedDeaths), max(data, d => d.NewConfirmedDeaths)];
+    }
+
     const colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
     const colormap = Scales.colormapLiner(startRange, colorRange);
     // const colormap = Scales.colorSequential(startRange, interpolateGnBu);
@@ -40,9 +51,15 @@ export function HeatMap(props){
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
             data.map( d => {
-                return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.ConfirmedCases)} 
+                if (SWITCH == 0) {
+                    return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedCases)} 
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}
                 />
+                } else if (SWITCH == 1) {
+                    return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedDeaths)} 
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}
+                />
+                }    
             } )
         }
         {TIME_POINTS.map(s => {
@@ -60,7 +77,7 @@ export function HeatMap(props){
                             </text>
                 })}
         <Legend x={0} y={height+10} width={width/2} height={20} numberOfTicks={5} 
-            rangeOfValues={[min(data, d => d.ConfirmedCases), max(data, d => d.ConfirmedCases)]} colormap={colormap}/>
+            rangeOfValues={rangeOfValues} colormap={colormap}/>
         </g>
         
 };

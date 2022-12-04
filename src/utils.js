@@ -41,10 +41,20 @@ function useData(csvPath, type){
                 d.PercentageVaccinated = +d.PercentageVaccinated;
                 d.Population = +d.Population;
                 d.PopulationVaccinated = +d.PopulationVaccinated;
+                d.NewConfirmedCases = +d.NewConfirmedCases;
+                d.NewConfirmedDeaths = +d.NewConfirmedDeaths;
                 d.V1 = +d.V1;
                 d.V2 = +d.V2;
                 d.V3 = +d.V3;
                 d.V4 = +d.V4;
+
+                // check for negative numbers, replace by zero, tentative
+                if (d.NewConfirmedCases < 0) {
+                    d.NewConfirmedCases = 0
+                }
+                if (d.NewConfirmedDeaths < 0) {
+                    d.NewConfirmedDeaths = 0
+                }
             });
             setData(data);
             console.log(data);

@@ -9,11 +9,11 @@ import { LineChart, MultipleLineChart } from './linecharts';
 
 import { useData, useData_time, selectCountry } from './utils'
 
-const csvUrl_time = "https://gist.githubusercontent.com/hogwild/4a23b2327e88e6e3aa101bb01ddb28ba/raw/81fd842af7328d2ad6d2a498cc4589031ae5b4af/citibike_rawdata_2020_4.csv"
+const csvUrl_time = "https://gist.githubusercontent.com/hogwild/4a23b2327e88e6e3aa101bb01ddb28ba/raw/81fd842af7328d2ad6d2a498cc4589031ae5b4af/citibike_rawdata_2020_4.csv";
 
-const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/68c6490e57bbcbd1ad978c81b19d088b/raw/f96591259ec90f51c0fcb716912bfed32b4b52fd/daily_oxcgrt.csv'
-const csvUrl_tenDay = 'https://gist.githubusercontent.com/MstXy/c73fd1b27493f8911185af457f1ac6f2/raw/a2fda4ba7a9844b787b372b57d27f3ce6274bf70/tenDay_oxcgrt.csv'
-const csvUrl_monthly = 'https://gist.githubusercontent.com/MstXy/cfff2134a6b897f4be6bf73d448e5259/raw/f49720050849da400a1779f628f0f675319e62f7/monthly_oxcgrt.csv'
+const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/daily_oxcgrt.csv';
+const csvUrl_tenDay = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/tenDay_oxcgrt.csv';
+const csvUrl_monthly = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/monthly_oxcgrt.csv';
 
 const COUNTRY_16 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
                     'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
@@ -40,6 +40,7 @@ function Vacc(){
     const height = HEIGHT - margin.top - margin.bottom;
     const width = WIDTH - margin.left - margin.right;
     
+    // reference for line chart
     const data_time = useData_time(csvUrl_time);
     
     // select data
@@ -47,6 +48,9 @@ function Vacc(){
     const dataUrl_choices = [csvUrl_monthly, csvUrl_tenDay, csvUrl_daily];
     var dataSelection_idx = 1;
     const data = useData(dataUrl_choices[dataSelection_idx], data_range_choices[dataSelection_idx]);
+
+    // SWITCH for: New Confirmed Cases or New Confirmd Deaths
+    var case_or_death = 1;  // 0 for cases, 1 for deaths
 
     if (!data_time) {
         return <p>Loading...</p>
@@ -59,6 +63,7 @@ function Vacc(){
     // filter data to country only in the list
     const filteredData = selectCountry(data, COUNTRY_LIST);
 
+    // reference for line chart
     console.log(filteredData);
     // console.log(data_time);
     const formatWeek = d3.timeFormat("%a %U");
@@ -76,7 +81,7 @@ function Vacc(){
         <h2>Based on Covid Cases, Vaccinated Population and Vaccination Policies.</h2>
         <svg width={WIDTH} height={TOTAL_HEIGHT}>
             <g>
-                <HeatMap margin={margin} height={height} width={width} data={filteredData} COUNTRY={COUNTRY_LIST} 
+                <HeatMap margin={margin} height={height} width={width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
                 {/* <MultipleLineChart x={margin.left} y={HEIGHT+margin.bottom} width={width} height={height} data={weekly} /> */}
             </g>
