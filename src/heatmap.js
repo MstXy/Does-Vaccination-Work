@@ -13,6 +13,7 @@ export function HeatMap(props){
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
     const yScale = Scales.band(COUNTRY, 0, height);
+
     if (SWITCH == 0) {
         // show cases
         var startRange = [min(data, d => d.NewConfirmedCases), median(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];

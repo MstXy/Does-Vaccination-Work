@@ -6,6 +6,7 @@ import { csv, json } from "d3";
 import "./styles.css";
 import { HeatMap } from "./heatmap";
 import { LineChart, MultipleLineChart } from './linecharts';
+import { ToolTip } from "./tooltip";
 
 import { useData, useData_time, selectCountry } from './utils'
 
@@ -33,12 +34,21 @@ function Vacc(){
 
     const [selectedPoint, setSelectedPoint] = React.useState(null);
 
-    const WIDTH = 1100;
-    const HEIGHT = 450;
-    const TOTAL_HEIGHT = 900;
-    const margin = {top: 100, right: 40, bottom: 50, left: 75};
-    const height = HEIGHT - margin.top - margin.bottom;
-    const width = WIDTH - margin.left - margin.right;
+    const WIDTH = 1400;
+    const HEIGHT = 900;
+    
+    const heatmap_margin = {top: 100, right: 340, bottom: 500, left: 75};
+    const heatmap_height = HEIGHT - heatmap_margin.top - heatmap_margin.bottom;
+    const heatmap_width = WIDTH - heatmap_margin.left - heatmap_margin.right;
+    
+    const linechart_margin = {top: 550, right: 340, bottom: 50, left: 75};
+    const linechart_height = HEIGHT - linechart_margin.top - linechart_margin.bottom;
+    const linechart_width = WIDTH - linechart_margin.left - linechart_margin.right;
+
+    const tooltip_margin = {top: 100, right: 20, bottom: 500, left: 1150};
+    const tooltip_height = HEIGHT - tooltip_margin.top - tooltip_margin.bottom;
+    const tooltip_width = WIDTH - tooltip_margin.left - tooltip_margin.right;
+
     
     // reference for line chart
     const data_time = useData_time(csvUrl_time);
@@ -63,6 +73,10 @@ function Vacc(){
     // filter data to country only in the list
     const filteredData = selectCountry(data, COUNTRY_LIST);
 
+    // get default world data to display.
+    const default_world = data[data.length-1];
+    // console.log(default_world);
+
     // reference for line chart
     console.log(filteredData);
     // console.log(data_time);
@@ -79,11 +93,13 @@ function Vacc(){
     return <div>
         <h1>Does Vaccination Work?</h1>
         <h2>Based on Covid Cases, Vaccinated Population and Vaccination Policies.</h2>
-        <svg width={WIDTH} height={TOTAL_HEIGHT}>
+        <svg width={WIDTH} height={HEIGHT}>
             <g>
-                <HeatMap margin={margin} height={height} width={width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
+                <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
-                {/* <MultipleLineChart x={margin.left} y={HEIGHT+margin.bottom} width={width} height={height} data={weekly} /> */}
+                <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={weekly} />
+                <ToolTip margin={tooltip_margin} height={tooltip_height} width={tooltip_width} 
+                    default_world={default_world} selectedPoint={selectedPoint}/>
             </g>
         </svg>
     </div>
