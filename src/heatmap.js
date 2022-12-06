@@ -49,6 +49,24 @@ export function HeatMap(props){
         } 
     };
 
+    const textfrontsizem = (selectedPoint,thisPoint) => {
+        if  (!selectedPoint) {
+            return '10px'
+        } else {
+            // also check if in the same row / col with the selected point
+            return (selectedPoint.CountryName === thisPoint) ? '15px' : '10px'  
+        } 
+    };
+
+    const textfrontsizes = (selectedPoint,thisPoint) => {
+        if  (!selectedPoint) {
+            return '11px'
+        } else {
+            // also check if in the same row / col with the selected point
+            return (selectedPoint.Date === thisPoint) ? '15px' : '11px'  
+        } 
+    };
+
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
         {
             data.map( d => {
@@ -65,14 +83,14 @@ export function HeatMap(props){
         }
         {TIME_POINTS.map(s => {
                         return <g key={s} transform={`translate(${xScale(s)+5},-8)rotate(60)`}>
-                        <text style={{textAnchor:'end'}}
+                        <text style={{textAnchor:'end',fontSize:textfrontsizes(selectedPoint,s)}}
                                 opacity={textOpacity_time(selectedPoint, s)}>
                                     {s}
                             </text>
                         </g>
                     })}
         {COUNTRY.map(m => {
-                    return <text key={m} style={{textAnchor:'end'}} x={-5} y={yScale(m)+10}
+                    return <text key={m} style={{textAnchor:'end', fontSize:textfrontsizem(selectedPoint,m)}} x={-5} y={yScale(m)+10}
                                 opacity={textOpacity_country(selectedPoint, m)}>
                                 {m}
                             </text>

@@ -24,9 +24,9 @@ const COUNTRY_20 = ['Russia', 'China', 'India', 'United Kingdom', 'France',
                     'South Africa', 'Canada', 'Australia', 'United States', 'Brazil', 
                     'Mexico','Greenland','Indonesia','New Zealand','Argentina'];
 const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
-                    'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
+                    'Germany', 'Italy', 'Saudi Arabia', 'Iran', 'Egypt', 
                     'South Africa', 'Canada', 'Australia', 'United States', 
-                    'Brazil', 'Mexico','Greenland','Indonesia','New Zealand',
+                    'Brazil', 'Mexico','Greece','Indonesia','New Zealand',
                     'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
                     'Mali','South Korea','Kazakhstan','Peru','Colombia'];
 
@@ -37,11 +37,11 @@ function Vacc(){
     const WIDTH = 1400;
     const HEIGHT = 900;
     
-    const heatmap_margin = {top: 100, right: 340, bottom: 500, left: 75};
+    const heatmap_margin = {top: 100, right: 340, bottom: 500, left: 130};
     const heatmap_height = HEIGHT - heatmap_margin.top - heatmap_margin.bottom;
     const heatmap_width = WIDTH - heatmap_margin.left - heatmap_margin.right;
     
-    const linechart_margin = {top: 550, right: 340, bottom: 50, left: 75};
+    const linechart_margin = {top: 550, right: 340, bottom: 50, left: 125};
     const linechart_height = HEIGHT - linechart_margin.top - linechart_margin.bottom;
     const linechart_width = WIDTH - linechart_margin.left - linechart_margin.right;
 
@@ -87,7 +87,7 @@ function Vacc(){
     const weekly = d3.groups(data_time, d => formatWeek(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
     // const temp = d3.groups(rawData, d =>  formatDaily(d.starttime));
     const daily = d3.groups(data_time, d =>  formatDaily(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
-    // console.log(weekly);
+    console.log(weekly);
     // console.log(temp);
 
     return <div>
@@ -97,7 +97,7 @@ function Vacc(){
             <g>
                 <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
-                <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={weekly} />
+                <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={data}/>
                 <ToolTip margin={tooltip_margin} height={tooltip_height} width={tooltip_width} 
                     default_world={default_world} selectedPoint={selectedPoint}/>
             </g>

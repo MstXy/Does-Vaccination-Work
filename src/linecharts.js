@@ -1,81 +1,60 @@
 import React from "react";
 import * as d3 from "d3";
+import { selectCountry } from './utils'
 
-export {LineChart, MultipleLineChart};
+export {MultipleLineChart};
 
-function LineChart(props){
+function MultipleLineChart(props){
     const {x, y, width, height, data} = props;
-    // console.log(data.map(d => d.date))
-    // data.forEach(d => d.date = new Date("4/"+d.date+"/2020"));
-    // const xScale = d3.scaleTime().range([0, width])
-    //             .domain(data.map(d => d.date))
-    // const formatTime = d3.timeFormat("%B %d, %Y");
-    // const xTicks = xScale.ticks(30).map(d => formatTime(d));
-    // console.log(xTicks);
-    // const parseTime = d3.timeParse("%B %d, %Y");
-
-    const xScale = d3.scaleBand().range([0, width])
-                .domain(data.map(d => d.date));
-    const yScale = d3.scaleLinear().range([height, 0])
-                .domain([0, d3.max(data, d => d.value)]).nice();
-    const line = d3.line()
-                .x(d => xScale(d.date))
-                .y(d => yScale(d.value))
+        
+        const xScale = d3.scaleBand().range([0, width])
+                .domain(data.map(d => d.Date));
+        const yScale = d3.scaleLinear().range([height, 0])
+                .domain([0, d3.max(data, d => d.PopulationVaccinated)]);
+        // var logdomainmax = Math.log(d3.max(data, d => d.PopulationVaccinated));
+        // console.log(logdomainmax)
+        // const yScale = d3.scaleLog().range([height, 0])
+        //         .domain([1, logdomainmax]);
+        const line = d3.line()
+                .x(d => xScale(d.Date))
+                .y(d => yScale(d.PopulationVaccinated))
                 .curve(d3.curveBasis);
 
     const xTicks = xScale.domain();
     const yTicks = yScale.ticks();
-
-    return <g transform={`translate(${x},${y})`}>
-        <line y2={height} stroke={`black`} />
-        {yTicks.map( tickValue => {
-            return <g key={tickValue} transform={`translate(-10, ${yScale(tickValue)})`}>
-                    <line x2={width} stroke={"gray"} />
-                    <text style={{ textAnchor:'end', fontSize:'18px' }}>
-                    {tickValue}
-                    </text>
-                </g> 
-        })}
-        <text style={{ textAnchor:'start', fontSize:'18px'}} transform={`translate(10, 0)rotate(0)`}>
-                {"Number of riders"}
-            </text>
-        <line x1={0} y1={height} x2={width} y2={height} stroke={`black`} />
-        {xTicks.map( tickValue => {
-            return <g key={tickValue} transform={`translate(${xScale(tickValue)}, ${height})`}>
-                    <line y2={5} stroke={"black"} />
-                    <text style={{ textAnchor:'middle', fontSize:'18px'}} y={20}>
-                    {tickValue}
-                    </text>
-            </g> 
-        })}
-        <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${width}, ${height-10})`}>
-                        {"April"}
-                    </text>
-        <path d={line(data)} stroke={"steelblue"} strokeWidth={3} fill={"none"} />
-        </g>
-}
-
-function MultipleLineChart(props){
-    const {x, y, width, height, data} = props;
-        const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; 
-        const xScale = d3.scaleBand().range([0, width]).domain(weekdays);
-        const yScale = d3.scaleLinear().range([height, 0]).domain([0, d3.max(data, d => d.value)]).nice();
-        const line = d3.line().x(d => xScale(d.date)).y(d => yScale(d.value));
-        const xTicks = xScale.domain();
-        const yTicks = yScale.ticks();
-        // console.log(data.filter( d => d.date.slice(-2) === "14").map(d => {d.date = d.date.slice(0, 3); return d})
-        //     .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date)));
-        const week1 = data.filter( d => d.date.slice(-2) === "13").map(d => {d.date = d.date.slice(0, 3); return d})
-                .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date));
-        const week2 = data.filter( d => d.date.slice(-2) === "14").map(d => {d.date = d.date.slice(0, 3); return d})
-                .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date));
-        const week3 = data.filter( d => d.date.slice(-2) === "15").map(d => {d.date = d.date.slice(0, 3); return d})
-                .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date));
-        const week4 = data.filter( d => d.date.slice(-2) === "16").map(d => {d.date = d.date.slice(0, 3); return d})
-                .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date));
-        const week5 = data.filter( d => d.date.slice(-2) === "17").map(d => {d.date = d.date.slice(0, 3); return d})
-                .sort((a, b) => weekdays.indexOf(a.date)-weekdays.indexOf(b.date));
-        console.log(week1.slice(-1));
+    
+        const Russia = selectCountry(data,'Russia')
+        const China = selectCountry(data,'China')
+        const India = selectCountry(data,'India')
+        const United_Kingdom = selectCountry(data,'United Kingdom')
+        const France = selectCountry(data,'France')
+        const Germany = selectCountry(data,'Germany')
+        const Italy = selectCountry(data,'Italy')
+        const Saudi_Arabia = selectCountry(data,'Saudi Arabia')
+        const Iran = selectCountry(data,'Iran')
+        const Egypt = selectCountry(data,'Egypt')
+        const South_Africa = selectCountry(data,'South Africa')
+        const Canada = selectCountry(data,'Canada')
+        const Australia = selectCountry(data,'Australia')
+        const United_States = selectCountry(data,'United States')
+        const Brazil = selectCountry(data,'Brazil')
+        const Mexico = selectCountry(data,'Mexico')
+        const Greece = selectCountry(data,'Greece')
+        const Indonesia = selectCountry(data,'Indonesia')
+        const New_Zealand = selectCountry(data,'New Zealand')
+        const Argentina = selectCountry(data,'Argentina')
+        const Finland = selectCountry(data,'Finland')
+        const Turkey = selectCountry(data,'Turkey')
+        const Ukraine = selectCountry(data,'Ukraine')
+        const Japan = selectCountry(data,'Japan')
+        const Spain = selectCountry(data,'Spain')
+        const Mali = selectCountry(data,'Mali')
+        const South_Korea = selectCountry(data,'South Korea')
+        const Kazakhstan = selectCountry(data,'Kazakhstan')
+        const Peru = selectCountry(data,'Peru')
+        const Colombia = selectCountry(data,'Colombia')
+        const World = selectCountry(data,'World')
+     
         return <g transform={`translate(${x},${y})`}>
             <line y2={height} stroke={`black`} />
             {yTicks.map( tickValue => {
@@ -87,7 +66,7 @@ function MultipleLineChart(props){
                     </g> 
             })}
             <text style={{ textAnchor:'start', fontSize:'18px'}} transform={`translate(10, 0)rotate(0)`}>
-                    {"Number of riders"}
+                    {"Number of Vaccinated"}
                 </text>
             <line x1={0} y1={height} x2={width} y2={height} stroke={`black`} />
             {xTicks.map( tickValue => {
@@ -98,29 +77,65 @@ function MultipleLineChart(props){
                         </text>
                 </g> 
             })}
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${width}, ${height-10})`}>
-                            {"April"}
-                </text>
-            <path d={line(week1)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
-            <path d={line(week2)} stroke={"#fdae61"} strokeWidth={3} fill={"none"} />
-            <path d={line(week3)} stroke={"black"} strokeWidth={3} fill={"none"} />
-            <path d={line(week4)} stroke={"#abdda4"} strokeWidth={3} fill={"none"} />
-            <path d={line(week5)} stroke={"#2b83ba"} strokeWidth={3} fill={"none"} />
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(week1.slice(-1)[0].date)}, ${yScale(week1.slice(-1)[0].value)})`}>
-                            {"Week 1"}
-                </text>
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(week2.slice(-1)[0].date)}, ${yScale(week2.slice(-1)[0].value)})`}>
-                            {"Week 2"}
-                </text>
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(week3.slice(-1)[0].date)+60}, ${yScale(week3.slice(-1)[0].value)+10})`}>
-                            {"Week 3"}
+            {/* <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${width}, ${height-10})`}>
+                            {"Time"}
+                </text> */}
+  
+
+            <path d={line(Russia)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(China)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(India)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(United_Kingdom)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(France)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Germany)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Italy)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Saudi_Arabia)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Iran)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Egypt)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(South_Africa)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Canada)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Australia)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(United_States)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Brazil)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Mexico)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Greece)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Indonesia)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(New_Zealand)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Argentina)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Finland)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Turkey)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Ukraine)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Japan)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Spain)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Mali)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(South_Korea)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(Kazakhstan)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Peru)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} />
+            <path d={line(Colombia)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+            <path d={line(World)} stroke={"#d7191c"} strokeWidth={3} fill={"none"} /> 
+
+              {/* // const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
+    // 'Germany', 'Italy', 'Saudi Arabia', 'Iran', 'Egypt', 
+    // 'South Africa', 'Canada', 'Australia', 'United States', 
+    // 'Brazil', 'Mexico','Greece','Indonesia','New Zealand',
+    // 'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
+    // 'Mali','South Korea','Kazakhstan','Peru','Colombia'] 还有World; */}
+            
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(China.slice(-1)[0].Date)}, ${yScale(China.slice(-1)[0].PopulationVaccinated)})`}>
+                            {"China"}
             </text>
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(week4.slice(-1)[0].date)+60}, ${yScale(week4.slice(-1)[0].value)+10})`}>
-                            {"Week 4"}
+
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(India.slice(-1)[0].Date)}, ${yScale(India.slice(-1)[0].PopulationVaccinated)})`}>
+                            {"India"}
             </text>
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(week5.slice(-1)[0].date)+60}, ${yScale(week5.slice(-1)[0].value)+10})`}>
-                            {"Week 5"}
+
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(United_States.slice(-1)[0].Date)}, ${yScale(United_States.slice(-1)[0].PopulationVaccinated)})`}>
+                            {"US"}
             </text>
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(World.slice(-1)[0].Date)}, ${yScale(World.slice(-1)[0].PopulationVaccinated)})`}>
+                            {"World"}
+            </text>
+           
 
             </g>
 
