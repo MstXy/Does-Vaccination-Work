@@ -12,9 +12,9 @@ import { useData, useData_time, selectCountry } from './utils'
 
 const csvUrl_time = "https://gist.githubusercontent.com/hogwild/4a23b2327e88e6e3aa101bb01ddb28ba/raw/81fd842af7328d2ad6d2a498cc4589031ae5b4af/citibike_rawdata_2020_4.csv";
 
-const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/daily_oxcgrt.csv';
-const csvUrl_tenDay = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/tenDay_oxcgrt.csv';
-const csvUrl_monthly = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/monthly_oxcgrt.csv';
+// const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/daily_oxcgrt.csv';
+const csvUrl_tenDay31 = 'https://gist.githubusercontent.com/SingleRubbish/054c07b902845a567c3e5be132284b00/raw/5fdeb4d91c0615ee4939f79f2f4c6385b42326af/tendays31';
+// const csvUrl_monthly = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/monthly_oxcgrt.csv';
 
 const COUNTRY_16 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
                     'Germany', 'Italy', 'Saudi Arabia', 'Congo', 'Egypt', 
@@ -29,6 +29,13 @@ const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France',
                     'Brazil', 'Mexico','Greece','Indonesia','New Zealand',
                     'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
                     'Mali','South Korea','Kazakhstan','Peru','Colombia'];
+
+const COUNTRY_31 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
+                    'Germany', 'Italy', 'Saudi Arabia', 'Iran', 'Egypt', 
+                    'South Africa', 'Canada', 'Australia', 'United States', 
+                    'Brazil', 'Mexico','Greece','Indonesia','New Zealand',
+                    'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
+                    'Mali','South Korea','Kazakhstan','Peru','Colombia','World'];
 
 function Vacc(){
 
@@ -45,7 +52,7 @@ function Vacc(){
     const linechart_height = HEIGHT - linechart_margin.top - linechart_margin.bottom;
     const linechart_width = WIDTH - linechart_margin.left - linechart_margin.right;
 
-    const tooltip_margin = {top: 100, right: 20, bottom: 500, left: 1150};
+    const tooltip_margin = {top: 100, right: 30, bottom: 500, left: 1100};
     const tooltip_height = HEIGHT - tooltip_margin.top - tooltip_margin.bottom;
     const tooltip_width = WIDTH - tooltip_margin.left - tooltip_margin.right;
 
@@ -54,9 +61,9 @@ function Vacc(){
     const data_time = useData_time(csvUrl_time);
     
     // select data
-    const data_range_choices = ["monthly", "tenDay", "daily"];
-    const dataUrl_choices = [csvUrl_monthly, csvUrl_tenDay, csvUrl_daily];
-    var dataSelection_idx = 1;
+    const data_range_choices = ["tenDay"];
+    const dataUrl_choices = [csvUrl_tenDay31];
+    var dataSelection_idx = 0;
     const data = useData(dataUrl_choices[dataSelection_idx], data_range_choices[dataSelection_idx]);
 
     // SWITCH for: New Confirmed Cases or New Confirmd Deaths
@@ -72,22 +79,25 @@ function Vacc(){
     var COUNTRY_LIST = COUNTRY_30;
     // filter data to country only in the list
     const filteredData = selectCountry(data, COUNTRY_LIST);
+    // var countryline = COUNTRY_31
+    // const datalinechart = selectCountry(data,countryline)
 
     // get default world data to display.
     const default_world = data[data.length-1];
     // console.log(default_world);
 
     // reference for line chart
-    console.log(filteredData);
+    // console.log(filteredData);
     // console.log(data_time);
-    const formatWeek = d3.timeFormat("%a %U");
-    const formatDaily = d3.timeFormat("%d")
+    // const formatWeek = d3.timeFormat("%a %U");
+    // const formatDaily = d3.timeFormat("%d")
+    // const world = selectCountry(data,'World')
     // rawData.forEach(d => console.log(formatWeek(d.starttime)));
     // const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; 
-    const weekly = d3.groups(data_time, d => formatWeek(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
+    // const weekly = d3.groups(data_time, d => formatWeek(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
     // const temp = d3.groups(rawData, d =>  formatDaily(d.starttime));
-    const daily = d3.groups(data_time, d =>  formatDaily(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
-    console.log(weekly);
+    // const daily = d3.groups(data_time, d =>  formatDaily(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
+    // console.log(weekly);
     // console.log(temp);
 
     return <div>

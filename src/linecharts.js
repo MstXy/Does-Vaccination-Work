@@ -6,20 +6,29 @@ export {MultipleLineChart};
 
 function MultipleLineChart(props){
     const {x, y, width, height, data} = props;
+    
+    const parsetime = d3.timeParse('%Y%m%d')
+    const formatday = d3.timeFormat("%Y-%m-%d")
+    const xdomain = ['20200101','20200701','20210101','20210701','20220101','20220701','20221101']
+    const xdo = xdomain.map(data => parsetime(data))
+    const xd = xdo.map(data => formatday(data))
+    // console.log(xd)
+    // console.log(data.map(d => d.Date))
         
         const xScale = d3.scaleBand().range([0, width])
                 .domain(data.map(d => d.Date));
         const yScale = d3.scaleLinear().range([height, 0])
-                .domain([0, d3.max(data, d => d.PopulationVaccinated)]);
+                .domain([0, d3.max(data, d => d.PercentageVaccinated)]);
         // var logdomainmax = Math.log(d3.max(data, d => d.PopulationVaccinated));
         // console.log(logdomainmax)
         // const yScale = d3.scaleLog().range([height, 0])
         //         .domain([1, logdomainmax]);
         const line = d3.line()
                 .x(d => xScale(d.Date))
-                .y(d => yScale(d.PopulationVaccinated))
-                .curve(d3.curveBasis);
-
+                .y(d => yScale(d.PercentageVaccinated))
+                .curve(d3.curveBasis)
+                ;
+    
     const xTicks = xScale.domain();
     const yTicks = yScale.ticks();
     
@@ -66,16 +75,19 @@ function MultipleLineChart(props){
                     </g> 
             })}
             <text style={{ textAnchor:'start', fontSize:'18px'}} transform={`translate(10, 0)rotate(0)`}>
-                    {"Number of Vaccinated"}
+                    {"Percentage of Vaccinated"}
                 </text>
             <line x1={0} y1={height} x2={width} y2={height} stroke={`black`} />
             {xTicks.map( tickValue => {
-                return <g key={tickValue} transform={`translate(${xScale(tickValue)}, ${height})`}>
+                if (xd.includes(tickValue)) {
+                    return <g key={tickValue} transform={`translate(${xScale(tickValue)}, ${height})`}>
                         <line y2={5} stroke={"black"} />
                         <text style={{ textAnchor:'middle', fontSize:'18px'}} y={20}>
                         {tickValue}
-                        </text>
-                </g> 
+                    </text>
+            </g>    
+                }
+                 
             })}
             {/* <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${width}, ${height-10})`}>
                             {"Time"}
@@ -121,18 +133,18 @@ function MultipleLineChart(props){
     // 'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
     // 'Mali','South Korea','Kazakhstan','Peru','Colombia'] 还有World; */}
             
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(China.slice(-1)[0].Date)}, ${yScale(China.slice(-1)[0].PopulationVaccinated)})`}>
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(China.slice(-1)[0].Date)}, ${yScale(China.slice(-1)[0].PercentageVaccinated)})`}>
                             {"China"}
             </text>
 
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(India.slice(-1)[0].Date)}, ${yScale(India.slice(-1)[0].PopulationVaccinated)})`}>
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(India.slice(-1)[0].Date)}, ${yScale(India.slice(-1)[0].PercentageVaccinated)})`}>
                             {"India"}
             </text>
 
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(United_States.slice(-1)[0].Date)}, ${yScale(United_States.slice(-1)[0].PopulationVaccinated)})`}>
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(United_States.slice(-1)[0].Date)}, ${yScale(United_States.slice(-1)[0].PercentageVaccinated)})`}>
                             {"US"}
             </text>
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(World.slice(-1)[0].Date)}, ${yScale(World.slice(-1)[0].PopulationVaccinated)})`}>
+            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(World.slice(-1)[0].Date)}, ${yScale(World.slice(-1)[0].PercentageVaccinated)})`}>
                             {"World"}
             </text>
            
