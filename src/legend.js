@@ -3,7 +3,7 @@ import { scaleLinear } from 'd3';
 
 export function Legend(props) {
     const {x, y, width, height, numberOfTicks, rangeOfValues, colormap} = props; 
-    console.log(rangeOfValues);
+    // console.log(rangeOfValues);
     const [start, end] = rangeOfValues;
     const xScale = scaleLinear().range([x, x+width]).domain(rangeOfValues).nice();
     const ticks = xScale.ticks(numberOfTicks);
