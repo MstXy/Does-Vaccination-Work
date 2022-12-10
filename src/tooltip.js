@@ -1,10 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
-import { Piechart } from "./piecharts";
-// import { PieChartV1 } from "./piecharts";
-// import { PieChartV2 } from "./piecharts";
-// import { PieChartV3 } from "./piecharts";
-// import { PieChartV4 } from "./piecharts";
+import { Piechart} from "./piecharts";
+import {Bar} from "./bar";
 
 export function ToolTip(props){
 
@@ -19,6 +16,8 @@ export function ToolTip(props){
     const v4_width = 60;
     const v4_height= 150+470;
 
+    const text_leftpad = 0;
+
     const explain_leftpad = 70;
 
     if (!selectedPoint) {
@@ -26,38 +25,46 @@ export function ToolTip(props){
     } else {
         var country_to_show = selectedPoint;
     }
-      
+    const getColor = (d) => {
+        if (d.MajorityVaccinated === "True") {
+            return "#0abab5"
+        } else if (d.MajorityVaccinated === "False") {
+            return "#ffc0cb"
+        }
+    }
    
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
         <g>
-            <text>
+            <text x={text_leftpad} y={0}>
                 Country Name: {country_to_show.CountryName}
             </text>
-            <text y={20}>
+            <text x={text_leftpad} y={20}>
                 Date: {country_to_show.Date}
             </text>
-            <text y={40}>
+            <text x={text_leftpad} y={40}>
                 Total Cases: {country_to_show.ConfirmedCases}
             </text>
-            <text y={60}>
+            <text x={text_leftpad} y={60}>
                 Total Deaths: {country_to_show.ConfirmedDeaths}
             </text>
-            <text y={80}>
+            <text x={text_leftpad} y={80}>
                 Daily Cases: {country_to_show.NewConfirmedCases}
             </text>
-            <text y={100}>
+            <text x={text_leftpad} y={100}>
                 Daily Deaths: {country_to_show.NewConfirmedDeaths}
             </text>
-            <text y={120}>
+            <text x={text_leftpad} y={120}>
                 Total Population: {country_to_show.Population}
             </text>
-            <text y={140}>
+            <text x={text_leftpad} y={140}>
                 Vaccinated Population: {country_to_show.PopulationVaccinated}
             </text>
             <text y={160}>
-                Majority Vaccinated: {country_to_show.MajorityVaccinated}
+                Percentage Vaccinated: <tspan fontWeight={"bold"} fill={getColor(country_to_show)}>{country_to_show.PercentageVaccinated}%</tspan>
             </text>
         </g>
+
+        <Bar width={10} height={165} x={235} y={-180} data={country_to_show}/>
 
         <text y={v1_height} x ={v1_width} textAnchor={"middle"}> V1_index</text>
         <Piechart width = {v1_width} height={v1_height} data = {country_to_show.V1}/>
