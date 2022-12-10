@@ -46,7 +46,9 @@ function useData(csvPath, type){
                 d.V1 = +d.V1;
                 d.V2 = +d.V2;
                 d.V3 = +d.V3;
-                d.V4 = +d.V4;
+                d.V4 = (d.V4 == "True") ? 100 : 0
+                
+                d.MajorityVaccinated = (d.MajorityVaccinated == "V") ? "True":"False"
 
                 // check for negative numbers, replace by zero, tentative
                 if (d.NewConfirmedCases < 0) {

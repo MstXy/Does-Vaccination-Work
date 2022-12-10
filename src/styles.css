@@ -1,0 +1,48 @@
+#title{
+    width: 1400px;
+    text-align: center;
+    font-size: 4em;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+#subtitle {
+    width: 1400px;
+    text-align: center;
+    font-size: 2em;
+    margin-top: 10px;
+    font-weight: bold;
+}
+#credit {
+    width: 1400px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+
+.checkbox {
+    position: absolute;
+    top: 300px;
+}
+    #showCase {
+        left: 100px;
+    }
+    #showDeath {
+        left: 300px;
+    }
+
+.checkbox_text{
+    position: absolute;
+    top: 285px;
+}
+    #checkbox_text_case{
+        left: 125px;
+    }
+    #checkbox_text_death{
+        left: 325px;
+    }
+
+
+svg{
+    position: absolute;
+    top: 325px;
+}

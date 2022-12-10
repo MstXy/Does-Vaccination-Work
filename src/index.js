@@ -8,9 +8,8 @@ import { HeatMap } from "./heatmap";
 import { LineChart, MultipleLineChart } from './linecharts';
 import { ToolTip } from "./tooltip";
 
-import { useData, useData_time, selectCountry } from './utils'
+import { useData, selectCountry } from './utils'
 
-const csvUrl_time = "https://gist.githubusercontent.com/hogwild/4a23b2327e88e6e3aa101bb01ddb28ba/raw/81fd842af7328d2ad6d2a498cc4589031ae5b4af/citibike_rawdata_2020_4.csv";
 
 // const csvUrl_daily = 'https://gist.githubusercontent.com/MstXy/fae64c4763555d0d7209a1ed3dd9574b/raw/677d5da2017080fee0660223f94266d0ea0e950b/daily_oxcgrt.csv';
 const csvUrl_tenDay31 = 'https://gist.githubusercontent.com/SingleRubbish/054c07b902845a567c3e5be132284b00/raw/5fdeb4d91c0615ee4939f79f2f4c6385b42326af/tendays31';
@@ -40,25 +39,25 @@ const COUNTRY_31 = ['Russia', 'China', 'India', 'United Kingdom', 'France',
 function Vacc(){
 
     const [selectedPoint, setSelectedPoint] = React.useState(null);
+    const [case_or_death, setCaseOrDeath] = React.useState(0);
+    const [caseChecked, setCaseChecked] = React.useState(true);
+    const [deathChecked, setDeathChecked] = React.useState(false);
 
     const WIDTH = 1400;
     const HEIGHT = 900;
     
-    const heatmap_margin = {top: 100, right: 340, bottom: 500, left: 130};
+    const heatmap_margin = {top: 100, right: 340, bottom: 500, left: 120};
     const heatmap_height = HEIGHT - heatmap_margin.top - heatmap_margin.bottom;
     const heatmap_width = WIDTH - heatmap_margin.left - heatmap_margin.right;
     
-    const linechart_margin = {top: 550, right: 340, bottom: 50, left: 125};
+    const linechart_margin = {top: 460, right: 340, bottom: 125, left: 125};
     const linechart_height = HEIGHT - linechart_margin.top - linechart_margin.bottom;
-    const linechart_width = WIDTH - linechart_margin.left - linechart_margin.right;
+    const linechart_width = WIDTH - linechart_margin.left + 5 - linechart_margin.right;
 
     const tooltip_margin = {top: 100, right: 30, bottom: 500, left: 1100};
     const tooltip_height = HEIGHT - tooltip_margin.top - tooltip_margin.bottom;
     const tooltip_width = WIDTH - tooltip_margin.left - tooltip_margin.right;
 
-    
-    // reference for line chart
-    const data_time = useData_time(csvUrl_time);
     
     // select data
     const data_range_choices = ["tenDay"];
@@ -66,12 +65,8 @@ function Vacc(){
     var dataSelection_idx = 0;
     const data = useData(dataUrl_choices[dataSelection_idx], data_range_choices[dataSelection_idx]);
 
-    // SWITCH for: New Confirmed Cases or New Confirmd Deaths
-    var case_or_death = 1;  // 0 for cases, 1 for deaths
+    
 
-    if (!data_time) {
-        return <p>Loading...</p>
-    }
     if (!data) {
         return <p>Loading...</p>
     }
@@ -81,33 +76,40 @@ function Vacc(){
     const filteredData = selectCountry(data, COUNTRY_LIST);
     // var countryline = COUNTRY_31
     // const datalinechart = selectCountry(data,countryline)
+    // console.log(filteredData);
 
     // get default world data to display.
     const default_world = data[data.length-1];
     // console.log(default_world);
 
-    // reference for line chart
-    // console.log(filteredData);
-    // console.log(data_time);
-    // const formatWeek = d3.timeFormat("%a %U");
-    // const formatDaily = d3.timeFormat("%d")
-    // const world = selectCountry(data,'World')
-    // rawData.forEach(d => console.log(formatWeek(d.starttime)));
-    // const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]; 
-    // const weekly = d3.groups(data_time, d => formatWeek(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
-    // const temp = d3.groups(rawData, d =>  formatDaily(d.starttime));
-    // const daily = d3.groups(data_time, d =>  formatDaily(d.starttime)).map( d=> {return { date:d[0], value:d[1].length}});
-    // console.log(weekly);
-    // console.log(temp);
+    // SWITCH for: New Confirmed Cases or New Confirmd Deaths
+    // var case_or_death = 1;  // 0 for cases, 1 for deaths
+    const onClick_case = () => {
+        setCaseOrDeath(0);
+        setCaseChecked(true);
+        setDeathChecked(false);  
+    };
+    const onClick_death = () => {
+        setCaseOrDeath(1);
+        setDeathChecked(true);  
+        setCaseChecked(false);  
+    };
+
 
     return <div>
-        <h1>Does Vaccination Work?</h1>
-        <h2>Based on Covid Cases, Vaccinated Population and Vaccination Policies.</h2>
+        <p id="title">💉 Does Vaccination Work?</p>
+        <p id="subtitle">Based on Covid Cases, Vaccinated Population and Vaccination Policies.</p>
+        <p id="credit">Made by Chengyu Zhang, Shixuan Zheng, Scott Ye</p>
+        <input type="checkbox" className="checkbox" id="showCase" name="showCase" onChange={onClick_case} checked={caseChecked}/>
+        <p className="checkbox_text" id="checkbox_text_case">Show Confirmed Cases</p>
+        <input type="checkbox" className="checkbox" id="showDeath" name="showDeath" onChange={onClick_death} checked={deathChecked}/>
+        <p className="checkbox_text" id="checkbox_text_death">Show Confirmed Deaths</p>
         <svg width={WIDTH} height={HEIGHT}>
             <g>
                 <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
-                <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={data}/>
+                <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={data}
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
                 <ToolTip margin={tooltip_margin} height={tooltip_height} width={tooltip_width} 
                     default_world={default_world} selectedPoint={selectedPoint}/>
             </g>

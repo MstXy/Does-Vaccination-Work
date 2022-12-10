@@ -11,13 +11,15 @@ export function ToolTip(props){
     const {margin, height, width, default_world, selectedPoint} = props;
 
     const v1_width = 60;
-    const v1_height= height/2+100;
+    const v1_height= 150+80;
     const v2_width = 60;
-    const v2_height= height/2+250;
+    const v2_height= 150+210;
     const v3_width = 60;
-    const v3_height= height/2+400;
+    const v3_height= 150+340;
     const v4_width = 60;
-    const v4_height= height/2+550;
+    const v4_height= 150+470;
+
+    const explain_leftpad = 70;
 
     if (!selectedPoint) {
         var country_to_show = default_world;
@@ -55,22 +57,22 @@ export function ToolTip(props){
             <text y={160}>
                 Majority Vaccinated: {country_to_show.MajorityVaccinated}
             </text>
-            <text y={180}>
-                Mandatory Vaccination: {country_to_show.V4}
-            </text>
         </g>
-        <text y={250} x ={25}> V1_index</text>
+
+        <text y={v1_height} x ={v1_width} textAnchor={"middle"}> V1_index</text>
         <Piechart width = {v1_width} height={v1_height} data = {country_to_show.V1}/>
-        <text y={400} x ={25}> V2_index</text>
+        <text y={v1_height} x ={v1_width+explain_leftpad}>Vaccine prioritisation</text>
+
+        <text y={v2_height} x ={v2_width} textAnchor={"middle"}> V2_index</text>
         <Piechart width = {v2_width} height={v2_height} data={country_to_show.V2}/>
-        <text y={550} x ={25}> V3_index</text>
+        <text y={v2_height} x ={v2_width+explain_leftpad}>Vaccine availability</text>
+
+        <text y={v3_height} x ={v3_width} textAnchor={"middle"}> V3_index</text>
         <Piechart width = {v3_width} height={v3_height} data={country_to_show.V3}/>
-        <text y={700} x ={25}> V4_index</text> 
-        {/* V4 currently is PercentageVaccinated   */}
-        <Piechart width = {v4_width} height={v4_height} data={country_to_show.PercentageVaccinated}/>
-        {/* <PieChartV1 offsetX={0} offsetY={0} height={height/2} width={width}/> */}
-        {/* <PieChartV2 offsetX={0} offsetY={0} height={height/2} width={width}/>
-        <PieChartV3 offsetX={0} offsetY={0} height={height/2} width={width}/>
-        <PieChartV4 offsetX={0} offsetY={0} height={height/2} width={width}/> */}
+        <text y={v3_height} x ={v3_width+explain_leftpad}>Vaccine financial support</text>
+
+        <text y={v4_height} x ={v1_width} textAnchor={"middle"}> V4_index</text> 
+        <Piechart width = {v4_width} height={v4_height} data={country_to_show.V4}/>
+        <text y={v4_height} x ={v4_width+explain_leftpad}>Mandatory vaccination</text>
     </g>
 }
