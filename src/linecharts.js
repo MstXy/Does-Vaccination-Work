@@ -1,14 +1,15 @@
 import React from "react";
 import * as d3 from "d3";
-import { selectCountry } from './utils'
+import { selectCountry } from './utils';
+import {timeFormat, timeParse} from "d3";
 
 export {MultipleLineChart};
 
 function MultipleLineChart(props){
     const {x, y, width, height, data, selectedPoint, setSelectedPoint} = props;
     
-    const parsetime = d3.timeParse('%Y%m%d')
-    const formatday = d3.timeFormat("%Y-%m-%d")
+    const parsetime = timeParse('%Y%m%d')
+    const formatday = timeFormat("%Y-%m-%d")
     const xdomain = ['20200101','20200701','20210101','20210701','20220101','20220701','20221101']
     const xdo = xdomain.map(data => parsetime(data))
     const xd = xdo.map(data => formatday(data))
