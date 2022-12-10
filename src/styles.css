@@ -46,3 +46,16 @@ svg{
     position: absolute;
     top: 325px;
 }
+
+#conclusion {
+    position: absolute;
+    top: 1200px;
+    width: 1400px;
+    text-align: center;
+    font-size: 5em;
+    font-weight: bolder;
+}
+
+body {
+    height: 1600px;
+}

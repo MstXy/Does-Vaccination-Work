@@ -114,6 +114,7 @@ function Vacc(){
                     default_world={default_world} selectedPoint={selectedPoint}/>
             </g>
         </svg>
+        <p id="conclusion">Vaccination does NOT work!</p>
     </div>
 
 
