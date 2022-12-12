@@ -128,6 +128,9 @@ function Vacc(){
             <br/>
             From <a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/">Battling Infectious Diseases in the 20th Century: The Impact of Vaccines </a>
         </p>
+        <p id="at_least">
+            At least for now.
+        </p>
         <p id="final_conclusion">
             Thus, we need to find more effective vaccines sooner.
             As more and more country are opening up on Covid-19, the seemingly non-harmful virus could still pose threat to our lives.
