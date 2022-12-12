@@ -58,20 +58,54 @@ svg{
 
 #conclusion_text {
     position: absolute;
-    top: 1400px;
+    top: 1450px;
     width: 800px;
     padding-left: 300px;
     padding-right: 300px;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #demostration {
     position: absolute;
-    top: 1600px;
+    top: 1650px;
     width: 800px;
+    left: 300px;
+}
+
+#caption {
+    position: absolute;
+    top: 2200px;
+    width: 1400px;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#final_conclusion{
+    position: absolute;
+    top: 2300px;
+    width: 800px;
+    padding-left: 300px;
+    padding-right: 300px;
+    text-align: center;
+    font-size: 1.5em;
+}
+#final_final_conclusion {
+    position: absolute;
+    top: 2600px;
+    width: 800px;
+    padding-left: 300px;
+    padding-right: 300px;
+    text-align: center;
+    font-size: 4em;
 }
 
 body {
-    height: 1800px;
+    height: 3000px;
+}
+
+::selection {
+    color: red;
+    background: yellow;
 }

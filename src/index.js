@@ -8,8 +8,6 @@ import { HeatMap } from "./heatmap";
 import { LineChart, MultipleLineChart } from './linecharts';
 import { ToolTip } from "./tooltip";
 
-import {demostration} from "./demonstration.png";
-
 import { useData, selectCountry } from './utils'
 
 
@@ -118,8 +116,26 @@ function Vacc(){
             </g>
         </svg>
         <p id="conclusion">Vaccination does NOT work!</p>
-        <p id="conclusion_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat sodales commodo. Etiam sagittis lacinia purus, euismod luctus metus pellentesque a. Donec in vehicula ipsum, non efficitur enim. Donec rhoncus diam erat, sit amet fringilla urna tristique et. Suspendisse potenti. Donec risus lacus, tristique ac faucibus a, hendrerit sed nibh. Integer ac lectus at quam vehicula condimentum pretium suscipit dui.</p>
-        <img src={demostration} alt="vaccination demonstration" id="demostration"/>
+        <p id="conclusion_text">
+                If Covid-19 Vaccination works, we'll expect to see the below pattern: 
+                a clear distinction line could be drawn, where a significant drop of cases could be seen.
+                <br/>
+                However, it is not the case in the above graph.
+                With world vaccinated population growing, the daily confirmed cases or deaths does not drop at all.</p>
+        <img src="https://raw.githubusercontent.com/MstXy/Does-Vaccination-Work/main/demonstration.png" alt="vaccination demonstration" id="demostration"/>
+        <p id="caption"> 
+            Measles cases in the United States in the 20th Century. 
+            <br/>
+            From <a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/">Battling Infectious Diseases in the 20th Century: The Impact of Vaccines </a>
+        </p>
+        <p id="final_conclusion">
+            Thus, we need to find more effective vaccines sooner.
+            As more and more country are opening up on Covid-19, the seemingly non-harmful virus could still pose threat to our lives.
+            And an effective vaccines with a better support of vaccination policy is needed.
+        </p>
+        <p id="final_final_conclusion">
+            😉
+        </p>
     </div>
 
 
