@@ -6,7 +6,7 @@ import {timeFormat, timeParse} from "d3";
 export {MultipleLineChart};
 
 function MultipleLineChart(props){
-    const {x, y, width, height, data, selectedPoint, setSelectedPoint} = props;
+    const {x, y, width, height, data, selectedPoint, setSelectedPoint, setHoverState} = props;
     
     const parsetime = timeParse('%Y%m%d')
     const formatday = timeFormat("%Y-%m-%d")
@@ -44,14 +44,16 @@ function MultipleLineChart(props){
         return selectedPoint&&(selectedPoint.CountryName === this_country) ? 1 : 0.4
     }
     const getColor = (this_country) => {
-        return selectedPoint&&(selectedPoint.CountryName === this_country) ? "#000" : "#d2d2d2"
+        return selectedPoint&&(selectedPoint.CountryName === this_country) ? "#2bb588" : "#d2d2d2"
     }
     
     const mouseOver = (d) => {
         setSelectedPoint(d[d.length-1]);
+        setHoverState(true);
     };
     const mouseOut = () => {
         setSelectedPoint(null);
+        setHoverState(false);
     };
 
         const Russia = selectCountry(data,'Russia')
@@ -97,7 +99,7 @@ function MultipleLineChart(props){
                     </g> 
             })}
             <text style={{ textAnchor:'start', fontSize:'18px'}} transform={`translate(10, 25)rotate(0)`}>
-                    {"Percentage of Vaccinated Population"}
+                    {"% of Vaccinated Population"}
                 </text>
             <line x1={0} y1={height} x2={width} y2={height} stroke={`black`} />
             {xTicks.map( tickValue => {
@@ -207,7 +209,7 @@ function MultipleLineChart(props){
             <path d={line(Colombia)} stroke={getColor(COUNTRY_30[29])} strokeWidth={3} fill={"none"} opacity={getOpacity(COUNTRY_30[29])}
                 onMouseEnter={()=>{mouseOver(Colombia)}} onMouseOut={mouseOut}
             /> 
-            <path d={line(World)} stroke={"#000"} strokeWidth={4} fill={"none"}/> 
+            <path d={line(World)} stroke={"#2924a6"} strokeWidth={4} fill={"none"}/> 
 
               {/* // const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
     // 'Germany', 'Italy', 'Saudi Arabia', 'Iran', 'Egypt', 

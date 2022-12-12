@@ -1,6 +1,6 @@
 import React from "react";
 import { Cell } from "./cell";
-import { min, max, median, interpolateGnBu, interpolateRdBu, mean , timeFormat, timeParse} from "d3";
+import { min, max, median, quantile, interpolateGnBu, interpolateYlGnBu, interpolateOrRd, interpolateBrBG, mean , timeFormat, timeParse} from "d3";
 import { Scales } from "./scale";
 import { Legend } from "./legend";
 import { findTimePoints } from './utils'
@@ -8,7 +8,7 @@ import { findTimePoints } from './utils'
 
 export function HeatMap(props){
 
-    const {margin, height, width, data, COUNTRY, SWITCH, selectedPoint, setSelectedPoint} = props;
+    const {margin, height, width, data, COUNTRY, SWITCH, selectedPoint, setSelectedPoint, hover_on_line} = props;
     const TIME_POINTS = findTimePoints(data);
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
@@ -26,20 +26,33 @@ export function HeatMap(props){
 
     if (SWITCH == 0) {
         // show cases
-        var startRange = [min(data, d => d.NewConfirmedCases), median(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];
+        var startRange = [min(data, d => d.NewConfirmedCases), 
+                        median(data, d => d.NewConfirmedCases),
+                        // quantile(data.map(d => d.NewConfirmedCases), 0.5),
+                        // quantile(data.map(d => d.NewConfirmedCases), 0.66),
+                        max(data, d => d.NewConfirmedCases)];
         // range for legend
         var rangeOfValues = [min(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];
+        var colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
+        var colormap = Scales.colormapLiner(startRange, colorRange);
     } else if (SWITCH == 1) {
         // show death
-        var startRange = [min(data, d => d.NewConfirmedDeaths), median(data, d => d.NewConfirmedDeaths), max(data, d => d.NewConfirmedDeaths)];
+        var startRange = [min(data, d => d.NewConfirmedDeaths), 
+                        // quantile(data.map(d => d.NewConfirmedDeaths), 0.33),
+                        // quantile(data.map(d => d.NewConfirmedDeaths), 0.5),
+                        median(data, d => d.NewConfirmedDeaths),
+                        max(data, d => d.NewConfirmedDeaths)];
         // range for legend
         var rangeOfValues = [min(data, d => d.NewConfirmedDeaths), max(data, d => d.NewConfirmedDeaths)];
+        var colorRange = [interpolateOrRd(0), interpolateOrRd(0.6), interpolateOrRd(1.0)];
+
+        var colormap = Scales.colormapLiner(startRange, colorRange);
     }
 
-    const colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
-    const colormap = Scales.colormapLiner(startRange, colorRange);
+    // const colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
+    // const colormap = Scales.colormapLiner(startRange, colorRange);
     // const colormap = Scales.colorSequential(startRange, interpolateGnBu);
-    // const colormap = Scales.colorDiverging(startRange, interpolateRdBu);
+    // const colormap = Scales.colorDiverging(startRange, interpolateSpectral);
 
     const textOpacity_country = (selectedPoint, thisPoint) => {
         if  (!selectedPoint) {
@@ -92,11 +105,11 @@ export function HeatMap(props){
             data.map( d => {
                 if (SWITCH == 0) {
                     return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedCases)} 
-                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}
                 />
                 } else if (SWITCH == 1) {
                     return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedDeaths)} 
-                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}
                 />
                 }    
             } )

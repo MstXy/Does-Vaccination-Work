@@ -39,6 +39,7 @@ const COUNTRY_31 = ['Russia', 'China', 'India', 'United Kingdom', 'France',
 function Vacc(){
 
     const [selectedPoint, setSelectedPoint] = React.useState(null);
+    const [hover_on_line, setHoverState] = React.useState(false);
     const [case_or_death, setCaseOrDeath] = React.useState(0);
     const [caseChecked, setCaseChecked] = React.useState(true);
     const [deathChecked, setDeathChecked] = React.useState(false);
@@ -107,9 +108,9 @@ function Vacc(){
         <svg width={WIDTH} height={HEIGHT}>
             <g>
                 <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
-                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}/>
                 <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={data}
-                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint}/>
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} setHoverState={setHoverState}/>
                 <ToolTip margin={tooltip_margin} height={tooltip_height} width={tooltip_width} 
                     default_world={default_world} selectedPoint={selectedPoint}/>
             </g>
