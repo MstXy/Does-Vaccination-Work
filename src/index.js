@@ -8,6 +8,8 @@ import { HeatMap } from "./heatmap";
 import { LineChart, MultipleLineChart } from './linecharts';
 import { ToolTip } from "./tooltip";
 
+import {demostration} from "./demonstration.png";
+
 import { useData, selectCountry } from './utils'
 
 
@@ -116,6 +118,8 @@ function Vacc(){
             </g>
         </svg>
         <p id="conclusion">Vaccination does NOT work!</p>
+        <p id="conclusion_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consequat sodales commodo. Etiam sagittis lacinia purus, euismod luctus metus pellentesque a. Donec in vehicula ipsum, non efficitur enim. Donec rhoncus diam erat, sit amet fringilla urna tristique et. Suspendisse potenti. Donec risus lacus, tristique ac faucibus a, hendrerit sed nibh. Integer ac lectus at quam vehicula condimentum pretium suscipit dui.</p>
+        <img src={demostration} alt="vaccination demonstration" id="demostration"/>
     </div>
 
 

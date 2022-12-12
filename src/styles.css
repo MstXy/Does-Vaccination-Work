@@ -56,6 +56,22 @@ svg{
     font-weight: bolder;
 }
 
+#conclusion_text {
+    position: absolute;
+    top: 1400px;
+    width: 800px;
+    padding-left: 300px;
+    padding-right: 300px;
+    text-align: center;
+    font-size: 2em;
+}
+
+#demostration {
+    position: absolute;
+    top: 1600px;
+    width: 800px;
+}
+
 body {
-    height: 1600px;
+    height: 1800px;
 }
