@@ -22,23 +22,78 @@
 .checkbox {
     position: absolute;
     top: 300px;
+    font-family: 'verdana';
 }
     #showCase {
         left: 100px;
     }
     #showDeath {
-        left: 300px;
+        left: 310px;
+    }
+    #showCasepercent{
+        left: 530px;
+    }
+    #showDeathpercent{
+        left: 690px;
+    }
+
+.checkboxcolor{
+    z-index: 2;
+    position:absolute;
+    top: 735px;
+    font-family: 'verdana';
+}
+
+    #showblue1 {
+    left: 600px;
+    }
+    #showblue2 {
+    left: 670px;
+    }
+    #showred1{
+    left: 740px;
+    }
+    #showred2{
+    left: 810px;
+    }
+    #showrainbow{left:880px;}
+.checkboxcolor_text{
+    position: absolute;
+    top: 717px;
+    font-family: 'verdana';
+}
+    #checkboxcolor_text_blue1{
+        left: 620px;
+    }
+    #checkboxcolor_text_blue2{
+        left: 690px;
+    }
+    #checkboxcolor_text_red1{
+        left: 760px;
+    }
+    #checkboxcolor_text_red2{
+        left: 830px;
+    }
+    #checkboxcolor_text_rainbow{
+        left: 900px;
     }
 
 .checkbox_text{
     position: absolute;
     top: 285px;
+    font-family: 'verdana';
 }
     #checkbox_text_case{
         left: 125px;
     }
     #checkbox_text_death{
-        left: 325px;
+        left: 335px;
+    }
+    #checkbox_text_case_percent{
+        left: 555px;
+    }
+    #checkbox_text_death_percent{
+        left: 715px;
     }
 
 
@@ -117,4 +172,42 @@ body {
 ::selection {
     color: red;
     background: yellow;
+}
+
+
+@-webkit-keyframes my-animation {
+    from { -webkit-transform: translateX(-100%); }
+    to { -webkit-transform: translateX(100%); }
+  }
+  
+@keyframes my-animation {
+    from {
+      -moz-transform: translateX(-100%);
+      -webkit-transform: translateX(-100%);
+      transform: translateX(-100%);
+    }
+    to {
+      -moz-transform: translateX(100%);
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+  }
+
+#scroll-container {
+    border: 3px solid black;
+    border-radius: 5px;
+    overflow: hidden;
+}
+  
+#scroll-text {
+    text-align: right;
+  
+    /* animation properties */
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    
+    -moz-animation: my-animation 15s linear infinite;
+    -webkit-animation: my-animation 15s linear infinite;
+    animation: my-animation 15s linear infinite;
 }
