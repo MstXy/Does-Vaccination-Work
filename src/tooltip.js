@@ -64,7 +64,7 @@ export function ToolTip(props){
             </text>
         </g>
 
-        <Bar width={10} height={165} x={235} y={-180} data={country_to_show}/>
+        <Bar width={10} height={165} x={270} y={-180} data={country_to_show}/>
 
         <text y={v1_height} x ={v1_width} textAnchor={"middle"}> V1_index</text>
         <Piechart width = {v1_width} height={v1_height} data = {country_to_show.V1}/>
