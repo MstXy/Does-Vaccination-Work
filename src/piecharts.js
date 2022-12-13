@@ -1,6 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
-import {arc} from "d3";
+import {arc, interpolateTurbo} from "d3";
 export {Piechart}
 
 function Piechart(props){
@@ -8,20 +8,16 @@ function Piechart(props){
 
     const getColor = (data) => {
         if (data >=80) {
-            // also check if in the same row / col with the selected point
-            return 'green' 
+            // return interpolateTurbo(0.4)
+            return "#02c402"
         } else if (data >=60) {
-            // also check if in the same row / col with the selected point
-            return '#6EB7C2'  
+            return interpolateTurbo(0.6)  
         } else if (data >=40) {
-            // also check if in the same row / col with the selected point
-            return 'yellow'  
+            return interpolateTurbo(0.75) 
         } else if (data >=20) {
-            // also check if in the same row / col with the selected point
-            return 'orange' 
+            return interpolateTurbo(0.9)  
         }else if (data >=0) {
-        // also check if in the same row / col with the selected point
-        return 'red' 
+            return interpolateTurbo(1.0) 
         }
     }
 

@@ -182,17 +182,19 @@ function Vacc(){
         <input type="checkbox" className="checkbox" id="showDeathpercent" name="showDeathpercent" onChange={onClick_death_percentage} checked={death_percentageChecked}/>
         <p className="checkbox_text" id="checkbox_text_death_percent">Show Deaths (%)</p>
 
-        <input type="checkbox" className="checkboxcolor" id="showblue1" name="showblue1" top={'735px'} onChange={onClick_blue1} checked={blue1checked}/>
-        <p className="checkboxcolor_text" id="checkboxcolor_text_blue1">Blue1</p>
-        <input type="checkbox" className="checkboxcolor" id="showblue2" name="showblue2" onChange={onClick_blue2} checked={blue2checked}/>
-        <p className="checkboxcolor_text" id="checkboxcolor_text_blue2">Blue2</p>
-        <input type="checkbox" className="checkboxcolor" id="showred1" name="showred1" onChange={onClick_red1} checked={red1checked}/>
-        <p className="checkboxcolor_text" id="checkboxcolor_text_red1">Red1</p>
-        <input type="checkbox" className="checkboxcolor" id="showred2" name="showred2" onChange={onClick_red2} checked={red2checked}/>
-        <p className="checkboxcolor_text" id="checkboxcolor_text_red2">Red2</p>
-        <input type="checkbox" className="checkboxcolor" id="showrainbow" name="showrainbow" onChange={onClick_rainbow} checked={rainbowchecked}/>
-        <p className="checkboxcolor_text" id="checkboxcolor_text_rainbow">Rainbow</p>
-
+        <div>
+            <p id="colormap">Colormap:</p>
+            <input type="checkbox" className="checkboxcolor" id="showblue1" name="showblue1" onChange={onClick_blue1} checked={blue1checked}/>
+            <p className="checkboxcolor_text" id="checkboxcolor_text_blue1">Blue 1</p>
+            <input type="checkbox" className="checkboxcolor" id="showblue2" name="showblue2" onChange={onClick_blue2} checked={blue2checked}/>
+            <p className="checkboxcolor_text" id="checkboxcolor_text_blue2">Blue 2</p>
+            <input type="checkbox" className="checkboxcolor" id="showred1" name="showred1" onChange={onClick_red1} checked={red1checked}/>
+            <p className="checkboxcolor_text" id="checkboxcolor_text_red1">Red 1</p>
+            <input type="checkbox" className="checkboxcolor" id="showred2" name="showred2" onChange={onClick_red2} checked={red2checked}/>
+            <p className="checkboxcolor_text" id="checkboxcolor_text_red2">Red 2</p>
+            <input type="checkbox" className="checkboxcolor" id="showrainbow" name="showrainbow" onChange={onClick_rainbow} checked={rainbowchecked}/>
+            <p className="checkboxcolor_text" id="checkboxcolor_text_rainbow">Rainbow</p>
+        </div>
 
         <svg width={WIDTH} height={HEIGHT}>
             <g>

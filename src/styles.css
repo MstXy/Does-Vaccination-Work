@@ -18,11 +18,9 @@
     font-size: 1.5em;
 }
 
-
 .checkbox {
     position: absolute;
-    top: 300px;
-    font-family: 'verdana';
+    top: 311px;
 }
     #showCase {
         left: 100px;
@@ -37,51 +35,10 @@
         left: 690px;
     }
 
-.checkboxcolor{
-    z-index: 2;
-    position:absolute;
-    top: 735px;
-    font-family: 'verdana';
-}
-
-    #showblue1 {
-    left: 600px;
-    }
-    #showblue2 {
-    left: 670px;
-    }
-    #showred1{
-    left: 740px;
-    }
-    #showred2{
-    left: 810px;
-    }
-    #showrainbow{left:880px;}
-.checkboxcolor_text{
-    position: absolute;
-    top: 717px;
-    font-family: 'verdana';
-}
-    #checkboxcolor_text_blue1{
-        left: 620px;
-    }
-    #checkboxcolor_text_blue2{
-        left: 690px;
-    }
-    #checkboxcolor_text_red1{
-        left: 760px;
-    }
-    #checkboxcolor_text_red2{
-        left: 830px;
-    }
-    #checkboxcolor_text_rainbow{
-        left: 900px;
-    }
-
 .checkbox_text{
     position: absolute;
-    top: 285px;
-    font-family: 'verdana';
+    top: 295px;
+    /* font-family: 'verdana'; */
 }
     #checkbox_text_case{
         left: 125px;
@@ -95,6 +52,56 @@
     #checkbox_text_death_percent{
         left: 715px;
     }
+
+#colormap {
+    position: absolute;
+    top: 720px;
+    left: 620px;
+}
+
+.checkboxcolor{
+    z-index: 2;
+    position:absolute;
+    top: 736px;
+}
+
+    #showblue1 {
+    left: 695px;
+    }
+    #showblue2 {
+    left: 765px;
+    }
+    #showred1{
+    left: 835px;
+    }
+    #showred2{
+    left: 905px;
+    }
+    #showrainbow{
+    left: 975px;
+    }
+
+.checkboxcolor_text{
+    position: absolute;
+    top: 720px;
+    /* font-family: 'verdana'; */
+}
+    #checkboxcolor_text_blue1{
+        left: 715px;
+    }
+    #checkboxcolor_text_blue2{
+        left: 785px;
+    }
+    #checkboxcolor_text_red1{
+        left: 855px;
+    }
+    #checkboxcolor_text_red2{
+        left: 925px;
+    }
+    #checkboxcolor_text_rainbow{
+        left: 995px;
+    }
+
 
 
 svg{
@@ -167,15 +174,15 @@ svg{
 
 body {
     height: 3000px;
+    font-family: Times New Roman;
 }
 
 ::selection {
-    color: red;
-    background: yellow;
+    color: black;
+    background:rgb(2, 255, 221);
 }
 
-
-@-webkit-keyframes my-animation {
+/* @-webkit-keyframes my-animation {
     from { -webkit-transform: translateX(-100%); }
     to { -webkit-transform: translateX(100%); }
   }
@@ -202,7 +209,6 @@ body {
 #scroll-text {
     text-align: right;
   
-    /* animation properties */
     -moz-transform: translateX(-100%);
     -webkit-transform: translateX(-100%);
     transform: translateX(-100%);
@@ -210,4 +216,4 @@ body {
     -moz-animation: my-animation 15s linear infinite;
     -webkit-animation: my-animation 15s linear infinite;
     animation: my-animation 15s linear infinite;
-}
+} */ 

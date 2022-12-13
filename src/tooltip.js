@@ -64,22 +64,22 @@ export function ToolTip(props){
             </text>
         </g>
 
-        <Bar width={10} height={165} x={270} y={-180} data={country_to_show}/>
+        <Bar width={10} height={165} x={250} y={-180} data={country_to_show}/>
 
         <text y={v1_height} x ={v1_width} textAnchor={"middle"}> V1_index</text>
         <Piechart width = {v1_width} height={v1_height} data = {country_to_show.V1}/>
-        <text y={v1_height} x ={v1_width+explain_leftpad}>Vaccine prioritisation</text>
+        <text y={v1_height} x ={v1_width+explain_leftpad}>Vaccine Prioritisation</text>
 
         <text y={v2_height} x ={v2_width} textAnchor={"middle"}> V2_index</text>
         <Piechart width = {v2_width} height={v2_height} data={country_to_show.V2}/>
-        <text y={v2_height} x ={v2_width+explain_leftpad}>Vaccine availability</text>
+        <text y={v2_height} x ={v2_width+explain_leftpad}>Vaccine Availability</text>
 
         <text y={v3_height} x ={v3_width} textAnchor={"middle"}> V3_index</text>
         <Piechart width = {v3_width} height={v3_height} data={country_to_show.V3}/>
-        <text y={v3_height} x ={v3_width+explain_leftpad}>Vaccine financial support</text>
+        <text y={v3_height} x ={v3_width+explain_leftpad}>Vaccine Financial Support</text>
 
         <text y={v4_height} x ={v1_width} textAnchor={"middle"}> V4_index</text> 
         <Piechart width = {v4_width} height={v4_height} data={country_to_show.V4}/>
-        <text y={v4_height} x ={v4_width+explain_leftpad}>Mandatory vaccination</text>
+        <text y={v4_height} x ={v4_width+explain_leftpad}>Mandatory Vaccination</text>
     </g>
 }

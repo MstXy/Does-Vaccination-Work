@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 import { selectCountry } from './utils';
-import {timeFormat, timeParse} from "d3";
+import {timeFormat, timeParse, interpolateSinebow} from "d3";
 
 export {MultipleLineChart};
 
@@ -48,8 +48,21 @@ function MultipleLineChart(props){
         return selectedPoint&&(selectedPoint.CountryName === this_country) ? 1 : 0
     }
 
+    const getCountryColor = (country_name) => {
+        // get country seed
+        const alpha = /^[A-Za-z]+$/;
+        var output = 0;
+        for(var i=0; i < country_name.length; i++){
+            if(country_name[i].match(alpha)){
+                var num = country_name[i].charCodeAt(0) - 96;
+                output += num;
+            }
+        }
+        return interpolateSinebow((num % 73) / 73)
+    }
+
     const getColor = (this_country) => {
-        return selectedPoint&&(selectedPoint.CountryName === this_country) ? "#2bb588" : "#d2d2d2"
+        return selectedPoint&&(selectedPoint.CountryName === this_country) ? getCountryColor(this_country) : "#d2d2d2"
     }
     
     const mouseOver = (d) => {
