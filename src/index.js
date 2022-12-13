@@ -40,9 +40,17 @@ function Vacc(){
 
     const [selectedPoint, setSelectedPoint] = React.useState(null);
     const [hover_on_line, setHoverState] = React.useState(false);
-    const [case_or_death, setCaseOrDeath] = React.useState(0);
+    const [case_death_percentage, setCaseOrDeath_percentage] = React.useState(0);
     const [caseChecked, setCaseChecked] = React.useState(true);
     const [deathChecked, setDeathChecked] = React.useState(false);
+    const [case_percentageChecked, setCase_percentageChecked] = React.useState(false);
+    const [death_percentageChecked, setDeath_percentageChecked] = React.useState(false);
+    const [color,setColor] = React.useState(0);
+    const [blue1checked,setBlue1Checked] = React.useState(true);
+    const [blue2checked,setBlue2Checked] = React.useState(false);
+    const [red1checked,setRed1Checked] = React.useState(false);
+    const [red2checked,setRed2Checked] = React.useState(false);
+    const [rainbowchecked,setRainbowChecked] = React.useState(false);
 
     const WIDTH = 1400;
     const HEIGHT = 900;
@@ -86,16 +94,80 @@ function Vacc(){
     // SWITCH for: New Confirmed Cases or New Confirmd Deaths
     // var case_or_death = 1;  // 0 for cases, 1 for deaths
     const onClick_case = () => {
-        setCaseOrDeath(0);
+        setCaseOrDeath_percentage(0);
         setCaseChecked(true);
         setDeathChecked(false);  
+        setCase_percentageChecked(false);
+        setDeath_percentageChecked(false);
     };
     const onClick_death = () => {
-        setCaseOrDeath(1);
+        setCaseOrDeath_percentage(1);
         setDeathChecked(true);  
         setCaseChecked(false);  
+        setCase_percentageChecked(false);
+        setDeath_percentageChecked(false);
     };
 
+    const onClick_case_percentage = () => {
+        setCaseOrDeath_percentage(2);
+        setDeathChecked(false);  
+        setCaseChecked(false);  
+        setCase_percentageChecked(true);
+        setDeath_percentageChecked(false);
+    };
+
+    const onClick_death_percentage = () => {
+        setCaseOrDeath_percentage(3);
+        setDeathChecked(false);  
+        setCaseChecked(false);  
+        setCase_percentageChecked(false);
+        setDeath_percentageChecked(true);
+    };
+
+    const onClick_blue1  = () => {
+        setColor(0);
+        setBlue1Checked(true);  
+        setBlue2Checked(false);  
+        setRed1Checked(false);
+        setRed2Checked(false);
+        setRainbowChecked(false);
+    };
+
+    const onClick_blue2  = () => {
+        setColor(1);
+        setBlue1Checked(false);  
+        setBlue2Checked(true);  
+        setRed1Checked(false);
+        setRed2Checked(false);
+        setRainbowChecked(false);
+    };
+
+    const onClick_red1  = () => {
+        setColor(2);
+        setBlue1Checked(false);  
+        setBlue2Checked(false);  
+        setRed1Checked(true);
+        setRed2Checked(false);
+        setRainbowChecked(false);
+    };
+
+    const onClick_red2  = () => {
+        setColor(3);
+        setBlue1Checked(false);  
+        setBlue2Checked(false);  
+        setRed1Checked(false);
+        setRed2Checked(true);
+        setRainbowChecked(false);
+    };
+
+    const onClick_rainbow  = () => {
+        setColor(4);
+        setBlue1Checked(false);  
+        setBlue2Checked(false);  
+        setRed1Checked(false);
+        setRed2Checked(false);
+        setRainbowChecked(true);
+    };
 
     return <div>
         <p id="title">💉 Does Vaccination Work?</p>
@@ -105,9 +177,26 @@ function Vacc(){
         <p className="checkbox_text" id="checkbox_text_case">Show Confirmed Cases</p>
         <input type="checkbox" className="checkbox" id="showDeath" name="showDeath" onChange={onClick_death} checked={deathChecked}/>
         <p className="checkbox_text" id="checkbox_text_death">Show Confirmed Deaths</p>
+        <input type="checkbox" className="checkbox" id="showCasepercent" name="showCasepercent" onChange={onClick_case_percentage} checked={case_percentageChecked}/>
+        <p className="checkbox_text" id="checkbox_text_case_percent">Show Cases (%)</p>
+        <input type="checkbox" className="checkbox" id="showDeathpercent" name="showDeathpercent" onChange={onClick_death_percentage} checked={death_percentageChecked}/>
+        <p className="checkbox_text" id="checkbox_text_death_percent">Show Deaths (%)</p>
+
+        <input type="checkbox" className="checkboxcolor" id="showblue1" name="showblue1" top={'735px'} onChange={onClick_blue1} checked={blue1checked}/>
+        <p className="checkboxcolor_text" id="checkboxcolor_text_blue1">Blue1</p>
+        <input type="checkbox" className="checkboxcolor" id="showblue2" name="showblue2" onChange={onClick_blue2} checked={blue2checked}/>
+        <p className="checkboxcolor_text" id="checkboxcolor_text_blue2">Blue2</p>
+        <input type="checkbox" className="checkboxcolor" id="showred1" name="showred1" onChange={onClick_red1} checked={red1checked}/>
+        <p className="checkboxcolor_text" id="checkboxcolor_text_red1">Red1</p>
+        <input type="checkbox" className="checkboxcolor" id="showred2" name="showred2" onChange={onClick_red2} checked={red2checked}/>
+        <p className="checkboxcolor_text" id="checkboxcolor_text_red2">Red2</p>
+        <input type="checkbox" className="checkboxcolor" id="showrainbow" name="showrainbow" onChange={onClick_rainbow} checked={rainbowchecked}/>
+        <p className="checkboxcolor_text" id="checkboxcolor_text_rainbow">Rainbow</p>
+
+
         <svg width={WIDTH} height={HEIGHT}>
             <g>
-                <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} SWITCH={case_or_death}
+                <HeatMap margin={heatmap_margin} height={heatmap_height} width={heatmap_width} data={filteredData} COUNTRY={COUNTRY_LIST} Color = {color} SWITCH={case_death_percentage}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}/>
                 <MultipleLineChart x={linechart_margin.left} y={linechart_margin.top} width={linechart_width} height={linechart_height} data={data}
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} setHoverState={setHoverState}/>
@@ -115,6 +204,11 @@ function Vacc(){
                     default_world={default_world} selectedPoint={selectedPoint}/>
             </g>
         </svg>
+        
+        {/* <p id="scroll-container">
+            <p id="scroll-text">This is scrolling text.</p>
+        </p>
+         */}
         <p id="conclusion">Vaccination does NOT work!</p>
         <p id="conclusion_text">
                 If Covid-19 Vaccination works, we'll expect to see the below pattern: 

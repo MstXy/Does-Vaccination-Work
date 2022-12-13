@@ -43,6 +43,11 @@ function MultipleLineChart(props){
     const getOpacity = (this_country) => {
         return selectedPoint&&(selectedPoint.CountryName === this_country) ? 1 : 0.4
     }
+
+    const getOpacitytext = (this_country) => {
+        return selectedPoint&&(selectedPoint.CountryName === this_country) ? 1 : 0
+    }
+
     const getColor = (this_country) => {
         return selectedPoint&&(selectedPoint.CountryName === this_country) ? "#2bb588" : "#d2d2d2"
     }
@@ -211,24 +216,98 @@ function MultipleLineChart(props){
             /> 
             <path d={line(World)} stroke={"#2924a6"} strokeWidth={4} fill={"none"}/> 
 
-              {/* // const COUNTRY_30 = ['Russia', 'China', 'India', 'United Kingdom', 'France', 
-    // 'Germany', 'Italy', 'Saudi Arabia', 'Iran', 'Egypt', 
-    // 'South Africa', 'Canada', 'Australia', 'United States', 
-    // 'Brazil', 'Mexico','Greece','Indonesia','New Zealand',
-    // 'Argentina','Finland','Turkey','Ukraine','Japan','Spain',
-    // 'Mali','South Korea','Kazakhstan','Peru','Colombia'] 还有World; */}
-            
-            {/* <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(China.slice(-1)[0].Date)}, ${yScale(China.slice(-1)[0].PercentageVaccinated)})`}>
+             
+             
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[0])}} transform={`translate(${xScale(Russia.slice(-1)[0].Date)}, ${yScale(Russia.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Russia"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[1])}} transform={`translate(${xScale(China.slice(-1)[0].Date)}, ${yScale(China.slice(-1)[0].PercentageVaccinated)})`}>
                             {"China"}
             </text>
-
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(India.slice(-1)[0].Date)}, ${yScale(India.slice(-1)[0].PercentageVaccinated)})`}>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[2])}} transform={`translate(${xScale(India.slice(-1)[0].Date)}, ${yScale(India.slice(-1)[0].PercentageVaccinated)-5})`}>
                             {"India"}
             </text>
-
-            <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(United_States.slice(-1)[0].Date)}, ${yScale(United_States.slice(-1)[0].PercentageVaccinated)})`}>
-                            {"US"}
-            </text> */}
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[3])}} transform={`translate(${xScale(United_Kingdom.slice(-1)[0].Date)}, ${yScale(United_Kingdom.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"United Kingdom"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[4])}} transform={`translate(${xScale(France.slice(-1)[0].Date)}, ${yScale(France.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"France"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[5])}} transform={`translate(${xScale(Germany.slice(-1)[0].Date)}, ${yScale(Germany.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Germany"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[6])}} transform={`translate(${xScale(Italy.slice(-1)[0].Date)}, ${yScale(Italy.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Italy"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[7])}} transform={`translate(${xScale(Saudi_Arabia.slice(-1)[0].Date)}, ${yScale(Saudi_Arabia.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Saudi_Arabia"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[8])}} transform={`translate(${xScale(Iran.slice(-1)[0].Date)}, ${yScale(Iran.slice(-1)[0].PercentageVaccinated)-5})`}>
+                            {"Iran"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[9])}} transform={`translate(${xScale(Egypt.slice(-1)[0].Date)}, ${yScale(Egypt.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Egypt"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[10])}} transform={`translate(${xScale(South_Africa.slice(-1)[0].Date)}, ${yScale(South_Africa.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"South Africa"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[11])}} transform={`translate(${xScale(Canada.slice(-1)[0].Date)}, ${yScale(Canada.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Canada"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[12])}} transform={`translate(${xScale(Australia.slice(-1)[0].Date)}, ${yScale(Australia.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Australia"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[13])}} transform={`translate(${xScale(United_States.slice(-1)[0].Date)}, ${yScale(United_States.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"United States"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[14])}} transform={`translate(${xScale(Brazil.slice(-1)[0].Date)}, ${yScale(Brazil.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Brazil"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[15])}} transform={`translate(${xScale(Mexico.slice(-1)[0].Date)}, ${yScale(Mexico.slice(-1)[0].PercentageVaccinated)-10})`}>
+                            {"Mexico"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[16])}} transform={`translate(${xScale(Greece.slice(-1)[0].Date)}, ${yScale(Greece.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Greece"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[17])}} transform={`translate(${xScale(Indonesia.slice(-1)[0].Date)}, ${yScale(Indonesia.slice(-1)[0].PercentageVaccinated)+15})`}>
+                            {"Indonesia"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[18])}} transform={`translate(${xScale(New_Zealand.slice(-1)[0].Date)}, ${yScale(New_Zealand.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"New Zealand"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[19])}} transform={`translate(${xScale(Argentina.slice(-1)[0].Date)}, ${yScale(Argentina.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Argentina"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[20])}} transform={`translate(${xScale(Finland.slice(-1)[0].Date)}, ${yScale(Finland.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Finland"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[21])}} transform={`translate(${xScale(Turkey.slice(-1)[0].Date)}, ${yScale(Turkey.slice(-1)[0].PercentageVaccinated)+15})`}>
+                            {"Turkey"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[22])}} transform={`translate(${xScale(Ukraine.slice(-1)[0].Date)}, ${yScale(Ukraine.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"'Ukraine"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[23])}} transform={`translate(${xScale(Japan.slice(-1)[0].Date)}, ${yScale(Japan.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Japan"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[24])}} transform={`translate(${xScale(Spain.slice(-1)[0].Date)}, ${yScale(Spain.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Spain"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[25])}} transform={`translate(${xScale(Mali.slice(-1)[0].Date)}, ${yScale(Mali.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Mali"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[26])}} transform={`translate(${xScale(South_Korea.slice(-1)[0].Date)}, ${yScale(South_Korea.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"South Korea"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[27])}} transform={`translate(${xScale(Kazakhstan.slice(-1)[0].Date)}, ${yScale(Kazakhstan.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Kazakhstan"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[28])}} transform={`translate(${xScale(Peru.slice(-1)[0].Date)}, ${yScale(Peru.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Peru"}
+            </text>
+            <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[29])}} transform={`translate(${xScale(Colombia.slice(-1)[0].Date)}, ${yScale(Colombia.slice(-1)[0].PercentageVaccinated)})`}>
+                            {"Colombia"}
+            </text>
             <text style={{ textAnchor:'end', fontSize:'18px'}} transform={`translate(${xScale(World.slice(-1)[0].Date)}, ${yScale(World.slice(-1)[0].PercentageVaccinated)})`}>
                             {"World"}
             </text>

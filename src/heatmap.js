@@ -1,6 +1,6 @@
 import React from "react";
 import { Cell } from "./cell";
-import { min, max, median, quantile, interpolateGnBu, interpolateYlGnBu, interpolateOrRd, interpolateBrBG, mean , timeFormat, timeParse} from "d3";
+import { min, max, median, quantile, interpolateGnBu, interpolateYlGnBu, interpolateOrRd, interpolateBrBG, mean , timeFormat, timeParse, interpolateRainbow} from "d3";
 import { Scales } from "./scale";
 import { Legend } from "./legend";
 import { findTimePoints } from './utils'
@@ -8,7 +8,7 @@ import { findTimePoints } from './utils'
 
 export function HeatMap(props){
 
-    const {margin, height, width, data, COUNTRY, SWITCH, selectedPoint, setSelectedPoint, hover_on_line} = props;
+    const {margin, height, width, data, COUNTRY,Color, SWITCH, selectedPoint, setSelectedPoint, hover_on_line} = props;
     const TIME_POINTS = findTimePoints(data);
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
@@ -23,7 +23,19 @@ export function HeatMap(props){
     const xdo = xdomain.map(data => parsetime(data))
     const xd = xdo.map(data => formatday(data))
 
+    if (Color == 0){
+        var colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
+    } else if (Color == 1){
+        var colorRange = [interpolateGnBu(0), interpolateGnBu(0.4), interpolateGnBu(1.0)];
+    } else if (Color == 2){
+        var colorRange = [interpolateOrRd(0), interpolateOrRd(0.6), interpolateOrRd(1.0)];
+    } else if (Color == 3){
+        var colorRange = [interpolateOrRd(0), interpolateOrRd(0.4), interpolateOrRd(1.0)];
+    } else if (Color == 4){
+        var colorRange = [interpolateRainbow(0.8), interpolateRainbow(0.4), interpolateRainbow(0.2)];
+    }
 
+    
     if (SWITCH == 0) {
         // show cases
         var startRange = [min(data, d => d.NewConfirmedCases), 
@@ -33,7 +45,6 @@ export function HeatMap(props){
                         max(data, d => d.NewConfirmedCases)];
         // range for legend
         var rangeOfValues = [min(data, d => d.NewConfirmedCases), max(data, d => d.NewConfirmedCases)];
-        var colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
         var colormap = Scales.colormapLiner(startRange, colorRange);
     } else if (SWITCH == 1) {
         // show death
@@ -44,8 +55,26 @@ export function HeatMap(props){
                         max(data, d => d.NewConfirmedDeaths)];
         // range for legend
         var rangeOfValues = [min(data, d => d.NewConfirmedDeaths), max(data, d => d.NewConfirmedDeaths)];
-        var colorRange = [interpolateOrRd(0), interpolateOrRd(0.6), interpolateOrRd(1.0)];
-
+        var colormap = Scales.colormapLiner(startRange, colorRange);
+    } else if (SWITCH == 2) {
+        // show cases percentage
+        var startRange = [min(data, d => d.NewConfirmedCases/d.Population), 
+                        median(data, d => d.NewConfirmedCases/d.Population),
+                        // quantile(data.map(d => d.NewConfirmedCases/d.Population), 0.5),
+                        // quantile(data.map(d => d.NewConfirmedCases/d.Population), 0.66),
+                        max(data, d => d.NewConfirmedCases/d.Population)];
+        // range for legend
+        var rangeOfValues = [min(data, d => d.NewConfirmedCases/d.Population), max(data, d => d.NewConfirmedCases/d.Population)];
+        var colormap = Scales.colormapLiner(startRange, colorRange);
+    } else if (SWITCH == 3) {
+        // show death percentage
+        var startRange = [min(data, d => d.NewConfirmedDeaths/d.Population), 
+                        // quantile(data.map(d => d.NewConfirmedDeaths/d.Population), 0.33),
+                        // quantile(data.map(d => d.NewConfirmedDeaths/d.Population), 0.5),
+                        median(data, d => d.NewConfirmedDeaths/d.Population),
+                        max(data, d => d.NewConfirmedDeaths/d.Population)];
+        // range for legend
+        var rangeOfValues = [min(data, d => d.NewConfirmedDeaths/d.Population), max(data, d => d.NewConfirmedDeaths/d.Population)];
         var colormap = Scales.colormapLiner(startRange, colorRange);
     }
 
@@ -111,7 +140,15 @@ export function HeatMap(props){
                     return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedDeaths)} 
                     selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}
                 />
-                }    
+                } else if (SWITCH == 2) {
+                    return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedCases/d.Population)} 
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}
+                />
+                }  else if (SWITCH == 3) {
+                    return <Cell key={d.CountryName+d.Date} d={d} xScale={xScale} yScale={yScale} color={colormap(d.NewConfirmedDeaths/d.Population)} 
+                    selectedPoint={selectedPoint} setSelectedPoint={setSelectedPoint} hover_on_line={hover_on_line}
+                />
+                }     
             } )
         }
         {TIME_POINTS.map(s => {
