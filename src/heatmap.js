@@ -9,11 +9,13 @@ import { findTimePoints } from './utils'
 export function HeatMap(props){
 
     const {margin, height, width, data, COUNTRY,Color, SWITCH, selectedPoint, setSelectedPoint, hover_on_line} = props;
+
+    const [hoverOnOmi, setOmiState] = React.useState(null);
+
     const TIME_POINTS = findTimePoints(data);
     // console.log(TIME_POINTS);
     const xScale = Scales.band(TIME_POINTS, 0, width);
     const yScale = Scales.band(COUNTRY, 0, height);
-
 
     // display ticks
     const parsetime = timeParse('%Y%m%d')
@@ -24,11 +26,12 @@ export function HeatMap(props){
     const xdo = xdomain.map(data => parsetime(data))
     const xd = xdo.map(data => formatday(data))
 
-    // DELTA & OMNICRON VARIANT time
+    // DELTA & OMICRON VARIANT time
     const DELTA = "2021-05-31";
-    const OMNICRON = "2021-11-26";
-    const OMNICRON_LEFT = "2021-11-21";
-    const OMNICRON_RIGHT = "2021-12-01";
+    const OMICRON = "2021-11-26";
+    const OMICRON_LEFT = "2021-11-21";
+    const OMICRON_RIGHT = "2021-12-01";
+
 
     if (Color == 0){
         var colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
@@ -136,10 +139,31 @@ export function HeatMap(props){
         } 
     };
 
+    // Omicron tag & tooltip
+    const omicron_display = (selectedPoint) => {
+        // excludes omicron
+        if (!selectedPoint || hover_on_line) {
+            return "block"
+        } else {
+            return "none"
+        }
+    }
+
+    const showOmi = () => {
+        setOmiState(true);
+    }
+    const hideOmi = () => {
+        setOmiState(null);
+    }
+    const omi_tooltip_display = (s) => {
+        if (s == true) {
+            return "block"
+        } else {
+            return "none"
+        }
+    }
+
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
-        {/* added Omicron time */}
-        <g transform={`translate(${(xScale(OMNICRON_LEFT)+xScale(OMNICRON_RIGHT))/2+5},-8)rotate(60)`}><text textAnchor={'end'} fontSize={"12px"}>Omicron emerges</text></g>
-        
         {
             data.map( d => {
                 if (SWITCH == 0) {
@@ -175,6 +199,25 @@ export function HeatMap(props){
                                 {m}
                             </text>
                 })}
+        {/* added Omicron time */}
+        <g transform={`translate(${(xScale(OMICRON_LEFT)+xScale(OMICRON_RIGHT))/2+2},-2)rotate(60)`}>
+            <text fill={"#733d00"} fontWeight={"bold"} textAnchor={'end'} fontSize={"15px"} display={omicron_display(selectedPoint)}
+                onMouseEnter={showOmi} onMouseOut={hideOmi}>
+                Omicron—
+            </text>
+        </g>
+        <g transform={`translate(${xScale(OMICRON_RIGHT)+10},-40)`} >
+            <rect fill={"#ffc98c"} opacity={0} width={300} height={60} x={-50} y={-30} rx={5} ry={5} onMouseOver={showOmi} onMouseOut={hideOmi} display={omi_tooltip_display(hoverOnOmi)}/>
+            <rect fill={"#ffc98c"} width={280} height={50} x={-5} y={-20} rx={5} ry={5} onMouseOver={showOmi} onMouseOut={hideOmi} display={omi_tooltip_display(hoverOnOmi)}/>
+            <text onMouseOver={showOmi} onMouseOut={hideOmi} display={omi_tooltip_display(hoverOnOmi)}>
+                <tspan x="0" dy="0em">Omicron emerges on November 26, 2021,</tspan>
+                <tspan x="0" dy="1.2em">according to&nbsp;
+                    <a href={"https://www.who.int/news-room/feature-stories/detail/one-year-since-the-emergence-of-omicron"} target={"_blank"} onMouseEnter={showOmi} onMouseOut={hideOmi} display={omi_tooltip_display(hoverOnOmi)}>
+                        <tspan textDecoration={"underline"} fill={"#009c9c"}>WHO</tspan>
+                    </a>.
+                </tspan> 
+            </text>
+        </g>
         <Legend x={0} y={height+10} width={width/2} height={20} numberOfTicks={5} 
             rangeOfValues={rangeOfValues} colormap={colormap}/>
         </g>

@@ -245,7 +245,7 @@ function MultipleLineChart(props){
                             {"Italy"}
             </text>
             <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[7])}} transform={`translate(${xScale(Saudi_Arabia.slice(-1)[0].Date)}, ${yScale(Saudi_Arabia.slice(-1)[0].PercentageVaccinated)})`}>
-                            {"Saudi_Arabia"}
+                            {"Saudi Arabia"}
             </text>
             <text style={{ textAnchor:'end', fontSize:'18px', opacity: getOpacitytext(COUNTRY_30[8])}} transform={`translate(${xScale(Iran.slice(-1)[0].Date)}, ${yScale(Iran.slice(-1)[0].PercentageVaccinated)-5})`}>
                             {"Iran"}

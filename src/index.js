@@ -219,7 +219,9 @@ function Vacc(){
         <p id="caption"> 
             Measles cases in the United States in the 20th Century. 
             <br/>
-            From <a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/">Battling Infectious Diseases in the 20th Century: The Impact of Vaccines </a>
+            From <a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/" target={"_blank"}>
+                    Battling Infectious Diseases in the 20th Century: The Impact of Vaccines 
+                </a>
         </p>
         <p className="conclusion" id="conclusion_text2">
             As vaccinated population grows, 
@@ -239,10 +241,10 @@ function Vacc(){
             <br/>
             <br/>
             We attribute the reason to the outbreak of&nbsp;
-                <a href={"https://www.who.int/news-room/feature-stories/detail/one-year-since-the-emergence-of-omicron"}>
+                <a href={"https://www.who.int/news-room/feature-stories/detail/one-year-since-the-emergence-of-omicron"} target={"_blank"} style={{color:"#733d00"}}>
                     Omicron variant
                 </a> 
-            &nbsp;first discovered in 26 November 2021, 
+            &nbsp;first discovered in November 26, 2021, 
             whose transmission rates increases drastically but death rate decreases. 
             As also shown in our visualization.
             <br/>

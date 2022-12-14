@@ -7,16 +7,16 @@ function Piechart(props){
     const{width,height,data} = props;
 
     const getColor = (data) => {
-        if (data >=80) {
+        if (data >= 80) {
             // return interpolateTurbo(0.4)
             return "#02c402"
-        } else if (data >=60) {
+        } else if (data >= 60) {
             return interpolateTurbo(0.6)  
-        } else if (data >=40) {
+        } else if (data >= 40) {
             return interpolateTurbo(0.75) 
-        } else if (data >=20) {
+        } else if (data >= 20) {
             return interpolateTurbo(0.9)  
-        }else if (data >=0) {
+        }else if (data >= 0) {
             return interpolateTurbo(1.0) 
         }
     }
