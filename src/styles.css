@@ -1,19 +1,31 @@
+:root {
+    --width: 1450px;
+    --pad: 325px;
+    --svgLeft: 25px;
+}
+
+a {
+   color: #00560c;
+
+}
+
 #title{
-    width: 1400px;
+    width: var(--width);
     text-align: center;
     font-size: 4em;
     margin-bottom: 10px;
     font-weight: bold;
 }
+
 #subtitle {
-    width: 1400px;
+    width: var(--width);
     text-align: center;
     font-size: 2em;
     margin-top: 10px;
     font-weight: bold;
 }
 #credit {
-    width: 1400px;
+    width: var(--width);
     text-align: center;
     font-size: 1.5em;
 }
@@ -107,47 +119,57 @@
 svg{
     position: absolute;
     top: 325px;
+    left: var(--svgLeft);
 }
 
 #conclusion {
     position: absolute;
     top: 1200px;
-    width: 1400px;
+    width: var(--width);
     text-align: center;
     font-size: 4em;
     font-weight: bolder;
 }
 
-#conclusion_text {
+.conclusion {
+    text-align: left;
+    width: 800px;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+    font-size: 1.5em;
+}
+
+#conclusion_text1 {
     position: absolute;
     top: 1400px;
-    width: 800px;
-    padding-left: 300px;
-    padding-right: 300px;
-    text-align: center;
-    font-size: 1.5em;
 }
 
 #demostration {
     position: absolute;
-    top: 1650px;
+    top: 1500px;
     width: 800px;
-    left: 300px;
+    left: var(--pad);
 }
 
 #caption {
     position: absolute;
-    top: 2200px;
-    width: 1400px;
+    top: 2050px;
+    width: var(--width);
     text-align: center;
     font-size: 1em;
     font-weight: bold;
 }
 
+#conclusion_text2 {
+    position: absolute;
+    top: 2125px;
+}
+
+
 #at_least {
     position: absolute;
-    top: 2275px;
-    width: 1400px;
+    top: 2650px;
+    width: var(--width);
     text-align: center;
     font-size: 3em;
     font-weight: bolder;
@@ -155,25 +177,18 @@ svg{
 
 #final_conclusion{
     position: absolute;
-    top: 2400px;
-    width: 800px;
-    padding-left: 300px;
-    padding-right: 300px;
-    text-align: center;
-    font-size: 1.5em;
+    top: 2800px;
 }
 #final_final_conclusion {
     position: absolute;
-    top: 2600px;
-    width: 800px;
-    padding-left: 300px;
-    padding-right: 300px;
+    top: 3000px;
+    width: var(--width);
     text-align: center;
     font-size: 4em;
 }
 
 body {
-    height: 3000px;
+    height: 3400px;
     font-family: Times New Roman;
 }
 

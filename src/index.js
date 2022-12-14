@@ -212,25 +212,52 @@ function Vacc(){
         </p>
          */}
         <p id="conclusion">Vaccination does NOT work!</p>
-        <p id="conclusion_text">
-                If Covid-19 Vaccination works, we'll expect to see the below pattern: 
-                a clear distinction line could be drawn, where a significant drop of cases could be seen.
-                <br/>
-                However, it is not the case in the above graph.
-                With world vaccinated population growing, the daily confirmed cases or deaths does not drop at all.</p>
+        <p className="conclusion" id="conclusion_text1">
+            If Covid-19 vaccination works, we will expect to see the below pattern: 
+        </p>
         <img src="https://raw.githubusercontent.com/MstXy/Does-Vaccination-Work/main/demonstration.png" alt="vaccination demonstration" id="demostration"/>
         <p id="caption"> 
             Measles cases in the United States in the 20th Century. 
             <br/>
             From <a href="http://graphics.wsj.com/infectious-diseases-and-vaccines/">Battling Infectious Diseases in the 20th Century: The Impact of Vaccines </a>
         </p>
+        <p className="conclusion" id="conclusion_text2">
+            As vaccinated population grows, 
+            a clear distinction line could be drawn in the heatmap corresponding to the stabilizing vaccinated population. 
+            <br/>
+            And to the right of the distinction line a significant drop of confirmed cases could be seen.
+            <br/>
+            <br/>
+            However, it is not the case in our visualization.
+            <br/>
+            With world vaccinated population growing, the daily confirmed cases or deaths does not drop at all.
+            <br/>
+            <br/>
+            What we do see is that as vaccinated population grows, 
+            the number of confirmed deaths actually increases across the world, 
+            while admittedly the number of confirmed deaths decreases.
+            <br/>
+            <br/>
+            We attribute the reason to the outbreak of&nbsp;
+                <a href={"https://www.who.int/news-room/feature-stories/detail/one-year-since-the-emergence-of-omicron"}>
+                    Omicron variant
+                </a> 
+            &nbsp;first discovered in 26 November 2021, 
+            whose transmission rates increases drastically but death rate decreases. 
+            As also shown in our visualization.
+            <br/>
+            <br/>
+            Thus, Covid vaccine really don't have much of a impact on our pandemic.
+        </p>
         <p id="at_least">
             At least for now.
         </p>
-        <p id="final_conclusion">
-            Thus, we need to find more effective vaccines sooner.
-            As more and more country are opening up on Covid-19, the seemingly non-harmful virus could still pose threat to our lives.
-            And an effective vaccines with a better support of vaccination policy is needed.
+        <p className="conclusion" id="final_conclusion">
+            Therefore, we need to find more effective vaccines sooner.
+            As more and more country are opening up on Covid-19, the seemingly less-harmful virus could still pose threat to our lives.
+            <br/>
+            <br/>
+            An effective vaccine with a better support of vaccination policy is still needed.
         </p>
         <p id="final_final_conclusion">
             😉

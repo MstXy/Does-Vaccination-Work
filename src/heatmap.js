@@ -14,6 +14,7 @@ export function HeatMap(props){
     const xScale = Scales.band(TIME_POINTS, 0, width);
     const yScale = Scales.band(COUNTRY, 0, height);
 
+
     // display ticks
     const parsetime = timeParse('%Y%m%d')
     const formatday = timeFormat("%Y-%m-%d")
@@ -22,6 +23,12 @@ export function HeatMap(props){
                         '20220101','20220301', '20220501','20220701','20220901','20221101']
     const xdo = xdomain.map(data => parsetime(data))
     const xd = xdo.map(data => formatday(data))
+
+    // DELTA & OMNICRON VARIANT time
+    const DELTA = "2021-05-31";
+    const OMNICRON = "2021-11-26";
+    const OMNICRON_LEFT = "2021-11-21";
+    const OMNICRON_RIGHT = "2021-12-01";
 
     if (Color == 0){
         var colorRange = [interpolateGnBu(0), interpolateGnBu(0.6), interpolateGnBu(1.0)];
@@ -130,6 +137,9 @@ export function HeatMap(props){
     };
 
     return <g transform={`translate(${margin.left}, ${margin.top})`}>
+        {/* added Omicron time */}
+        <g transform={`translate(${(xScale(OMNICRON_LEFT)+xScale(OMNICRON_RIGHT))/2+5},-8)rotate(60)`}><text textAnchor={'end'} fontSize={"12px"}>Omicron emerges</text></g>
+        
         {
             data.map( d => {
                 if (SWITCH == 0) {

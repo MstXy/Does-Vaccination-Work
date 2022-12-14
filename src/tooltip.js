@@ -62,7 +62,7 @@ export function ToolTip(props){
             <text y={160}>
                 Percentage Vaccinated: <tspan fontWeight={"bold"} fill={getColor(country_to_show)}>{country_to_show.PercentageVaccinated}%</tspan>
             </text>
-            <text y={190} text-decoration={"underline"}>
+            <text y={190} textDecoration={"underline"}>
                 Government Vaccination Policies:
             </text>
         </g>
