@@ -49,16 +49,8 @@ function MultipleLineChart(props){
     }
 
     const getCountryColor = (country_name) => {
-        // get country seed
-        const alpha = /^[A-Za-z]+$/;
-        var output = 0;
-        for(var i=0; i < country_name.length; i++){
-            if(country_name[i].match(alpha)){
-                var num = country_name[i].charCodeAt(0) - 96;
-                output += num;
-            }
-        }
-        return interpolateSinebow((num % 73) / 73)
+        var idx = COUNTRY_30.indexOf(country_name)
+        return interpolateSinebow(idx/30)
     }
 
     const getColor = (this_country) => {

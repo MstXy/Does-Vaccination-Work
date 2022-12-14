@@ -8,13 +8,13 @@ export function ToolTip(props){
     const {margin, height, width, default_world, selectedPoint} = props;
 
     const v1_width = 60;
-    const v1_height= 150+80;
+    const v1_height= 180+80;
     const v2_width = 60;
-    const v2_height= 150+210;
+    const v2_height= 180+210;
     const v3_width = 60;
-    const v3_height= 150+340;
+    const v3_height= 180+340;
     const v4_width = 60;
-    const v4_height= 150+470;
+    const v4_height= 180+470;
 
     const text_leftpad = 0;
 
@@ -62,9 +62,12 @@ export function ToolTip(props){
             <text y={160}>
                 Percentage Vaccinated: <tspan fontWeight={"bold"} fill={getColor(country_to_show)}>{country_to_show.PercentageVaccinated}%</tspan>
             </text>
+            <text y={190} text-decoration={"underline"}>
+                Government Vaccination Policies:
+            </text>
         </g>
 
-        <Bar width={10} height={165} x={250} y={-180} data={country_to_show}/>
+        <Bar width={10} height={165} x={250} y={-170} data={country_to_show}/>
 
         <text y={v1_height} x ={v1_width} textAnchor={"middle"}> V1_index</text>
         <Piechart width = {v1_width} height={v1_height} data = {country_to_show.V1}/>

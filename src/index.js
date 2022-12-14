@@ -63,7 +63,7 @@ function Vacc(){
     const linechart_height = HEIGHT - linechart_margin.top - linechart_margin.bottom;
     const linechart_width = WIDTH - linechart_margin.left + 5 - linechart_margin.right;
 
-    const tooltip_margin = {top: 100, right: 30, bottom: 500, left: 1100};
+    const tooltip_margin = {top: 85, right: 30, bottom: 500, left: 1100};
     const tooltip_height = HEIGHT - tooltip_margin.top - tooltip_margin.bottom;
     const tooltip_width = WIDTH - tooltip_margin.left - tooltip_margin.right;
 

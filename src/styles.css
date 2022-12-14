@@ -114,13 +114,13 @@ svg{
     top: 1200px;
     width: 1400px;
     text-align: center;
-    font-size: 5em;
+    font-size: 4em;
     font-weight: bolder;
 }
 
 #conclusion_text {
     position: absolute;
-    top: 1450px;
+    top: 1400px;
     width: 800px;
     padding-left: 300px;
     padding-right: 300px;
