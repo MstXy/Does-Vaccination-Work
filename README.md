@@ -2,11 +2,14 @@
 
 ### Information Visualization Fall 2022 Final Project.
 
-Made by: William Zhang [cz1627@nyu.edu](mailto:cz1627@nyu.edu), Scott Ye [my2152@nyu.edu](mailto:my2152@nyu.edu), Shixuan Zheng [sz2942@nyu.edu](mailto:sz2942@nyu.edu).  
+#### Made by: William Zhang [cz1627@nyu.edu](mailto:cz1627@nyu.edu), Scott Ye [my2152@nyu.edu](mailto:my2152@nyu.edu), Shixuan Zheng [sz2942@nyu.edu](mailto:sz2942@nyu.edu).  
 
-Dataset: Oxford Covid-19 Government Response Tracker ([OxCGRT](https://github.com/OxCGRT/covid-policy-tracker))
+#### Dataset: Oxford Covid-19 Government Response Tracker ([OxCGRT](https://github.com/OxCGRT/covid-policy-tracker))
 
-### Project link:
+#### Project link:
+
+https://mstxy.github.io/Does-Vaccination-Work
+
 
 ### 1. Overview:
 
