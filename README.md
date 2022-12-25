@@ -6,10 +6,7 @@
 
 #### Dataset: Oxford Covid-19 Government Response Tracker ([OxCGRT](https://github.com/OxCGRT/covid-policy-tracker))
 
-#### Project link:
-
-https://mstxy.github.io/Does-Vaccination-Work
-
+#### Project link: https://mstxy.github.io/Does-Vaccination-Work
 
 ### 1. Overview:
 
@@ -46,8 +43,6 @@ Below the matrix diagram, a line chart displays the vaccination status of the wo
 
 - Detailed Info with Multiple Charts  
 A third view on the right displays total cases, total deaths, daily cases, daily deaths, total population, vaccinated population, and percentage vaccinated in plain text. A simple bar chart will display the percentage. When there is no user interaction, it will show the world statistics. When one cell in the matrix diagram is hovered over, it will show the statistics of the selected country. In addition, donut charts are adopted to show the vaccination policy of the country when selected, and their descriptions will be displayed through tooltips. Both the bar chart and donut charts are encoded in color (hue) for an effortless interpretation.
-
-![Interaction_2](img/interaction2.png)
 
 -	Links  
 The matrix diagram and the line chart will be connected through interaction. On hovering one of the cells, its row and column will be highlighted. The corresponding line in the line chart will also be highlighted. On hovering one of the lines in the line chart, only the corresponding row in the matrix will be highlighted.  
