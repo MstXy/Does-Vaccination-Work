@@ -48,7 +48,7 @@ A third view on the right displays total cases, total deaths, daily cases, daily
 The matrix diagram and the line chart will be connected through interaction. On hovering one of the cells, its row and column will be highlighted. The corresponding line in the line chart will also be highlighted. On hovering one of the lines in the line chart, only the corresponding row in the matrix will be highlighted.  
 The juxtaposition of the matrix diagram and the line chart, along with the linked interactions and the attributes presented, makes the comparison of vaccination and Covid cases intuitive. With the support of policy strictness and other statistics, a holistic view of the relationship between Covid cases, vaccinated population, and vaccination policies could be formulated.
 
-5.	Reflection
+### 5.	Reflection
 
 There are several modifications in our final version. Firstly, instead of using months, we decided to adopt ten-day intervals in the matrix diagram, because it generates a visualization with higher accuracy and interpretability. It balances the data variance of each date, and produces enough patterns for the user to identify. 
 
